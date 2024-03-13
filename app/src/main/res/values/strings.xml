@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">AndroidFinalProject</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <string name="button_message1">Sunrise Sunset Lookup</string>
+    <string name="button_message2">Recipe Search</string>
+    <string name="button_message3">Dictionary API </string>
+    <string name="button_message4">Deezer Song Search API </string>
+
+</resources>
