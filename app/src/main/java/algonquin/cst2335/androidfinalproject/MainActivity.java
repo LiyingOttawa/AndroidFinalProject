@@ -1,6 +1,8 @@
 package algonquin.cst2335.androidfinalproject;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -11,6 +13,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import algonquin.cst2335.androidfinalproject.databinding.ActivityMainBinding;
+import algonquin.cst2335.androidfinalproject.databinding.ActivityRecipesBinding;
+import algonquin.cst2335.androidfinalproject.recipe.RecipesActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,6 +34,13 @@ public class MainActivity extends AppCompatActivity {
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
                 .build();
 
+        findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, RecipesActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
