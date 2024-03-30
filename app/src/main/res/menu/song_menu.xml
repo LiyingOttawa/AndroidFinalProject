@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:ignore="MissingDefaultResource">
+
+    <item
+        android:id="@+id/returnHomeMenu"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/returnStep"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/showSaveList"
+        android:icon="@android:drawable/star_big_on"
+        android:title="@string/favButton"
+        app:showAsAction="always" />
+
+
+    <item
+        android:id="@+id/ritaRecipePage"
+        android:icon="@android:drawable/ic_menu_agenda"
+        android:title="@string/goToRecipePage"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/ritaDictionary"
+        android:icon="@android:drawable/btn_plus"
+        android:title="@string/goToDictionaryPage"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/goingTosunApp"
+        android:icon="@android:drawable/ic_menu_mylocation"
+        android:title="@string/goToSunPage"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/song_menu_about"
+        android:title="@string/About_name"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/song_menu_help"
+        android:title="@string/How_to_use_name"
+        app:showAsAction="never" />
+
+</menu>

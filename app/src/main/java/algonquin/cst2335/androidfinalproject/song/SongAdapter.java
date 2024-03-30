@@ -3,10 +3,13 @@ package algonquin.cst2335.androidfinalproject.song;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -32,8 +35,9 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
     public void onBindViewHolder(@NonNull SongViewHolder holder, int position) {
         Song song = songList.get(position);
         holder.textViewTitle.setText(song.getTitle());
-        holder.textViewAlbum.setText(song.getAlbum());
-        holder.textViewDuration.setText(song.getDuration());
+        holder.textViewAlbum.setText(song.getName());
+        holder.textViewDuration.setText(String.valueOf(song.getDuration())); // Convert int to String
+        Picasso.get().load(song.getCover()).into(holder.imageViewAlbumCover);
     }
 
     @Override
@@ -43,13 +47,14 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
 
     static class SongViewHolder extends RecyclerView.ViewHolder {
         TextView textViewTitle, textViewAlbum, textViewDuration;
+        ImageView imageViewAlbumCover;
 
         public SongViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewTitle = itemView.findViewById(R.id.textViewTitle);
             textViewAlbum = itemView.findViewById(R.id.textViewAlbum);
             textViewDuration = itemView.findViewById(R.id.textViewDuration);
+            imageViewAlbumCover = itemView.findViewById(R.id.imageViewAlbumCover);
         }
     }
 }
-

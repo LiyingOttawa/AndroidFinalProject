@@ -2,12 +2,16 @@ package algonquin.cst2335.androidfinalproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
+import androidx.appcompat.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import algonquin.cst2335.androidfinalproject.song.MainSongActivity;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,7 +22,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        Toolbar myToolbar = findViewById(R.id.main_toolbar);
+        setSupportActionBar(myToolbar);
+
         button4 = findViewById(R.id.button4);
+
 
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,4 +38,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
 }

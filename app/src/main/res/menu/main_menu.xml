@@ -1,0 +1,34 @@
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:ignore="MissingDefaultResource">
+    <item
+        android:id="@+id/action_icon"
+        android:icon="@drawable/action_icon"
+        android:title="Icon"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/sunMenu"
+        android:icon="@android:drawable/alert_dark_frame"
+        android:title="@string/sunApp"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/recipeMenu"
+        android:icon="?android:attr/galleryItemBackground"
+        android:title="@string/recipeApp"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/dictionaryMenu"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/dictionaryApp"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/deezer"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="@string/deezerApp"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/about"
+        android:title="@string/ziyaoAbout"
+        app:showAsAction="never" />
+</menu>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AndroidFinalProject</string>
+    <string name="app_name">AllInOne</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
@@ -8,5 +8,153 @@
     <string name="button_message2">Recipe Search</string>
     <string name="button_message3">Dictionary API </string>
     <string name="button_message4">Deezer Song Search API </string>
+
+    <!-- song-->
+    <string name="yxeditSearchName">Enter word to search</string>
+    <string name="yxSearchBtNname">Seach</string>
+    <string name="yxSaveBtnName">See Saved Term</string>
+    <string name="Save_name">Saved Term</string>
+    <string name="About_name">About</string>
+    <string name="How_to_use_name">How to use</string>
+
+    <string name="goToHomePage">Go to Home Page</string>
+    <string name="goToSongPage">Go to Song Page</string>
+    <string name="goToRecipePage">Go to Recipe Page</string>
+    <string name="goToSunPage">Go to Sun Page</string>
+    <string name="goToDictionaryPage">Go to Dictionary</string>
+
+    <string name="sunApp">Sunrise ad Sunset</string>
+    <string name="recipeApp">Recipe Search</string>
+    <string name="dictionaryApp">Dictionary API</string>
+    <string name="deezerApp">Deezer Song</string>
+    <string name="sumAppTitle">CST2355 AllInOne</string>
+    <string name="goingTosunApp">Going to Sunrise ad Sunset</string>
+    <string name="goingTorecipeApp">Going to Recipe Search</string>
+    <string name="goingTodictionaryApp">Going to Dictionary API</string>
+    <string name="goingTodeezerApp">Going to Deezer Song</string>
+    <string name="SongAbout">This application is the final project of our class CST2355</string>
+    <string name="SongAboutuse">Instructions on how to use the interface:
+        \n1. Enter a search term in the middle of the provided EditText.
+        \n2. Click the Search button to retrieve data from the Deezer Song API.
+        \n3. Click the Favorite List button to access the favorite list which song you saved before.
+        \n4. Click on a song to see detailed information in a separate fragment.
+        \n5. Click the Save to list button to add a song to the favorite list in the fragment.
+        \n6. To delete a term, select it and choose the Delete choice from the favorite list.
+        \n7. The toolbar provide access to Sun page, Receipe page, Dictionary page and Song page.
+        \n8. Each page click the return will back to the previous page.
+        \n9. For more help, you can contact support.</string>
+
+    <string name="songSave">Save this item</string>
+    <string name="songDelete">Delete this item</string>
+
+
+    <string name="songsearch">Searching for the artist...</string>
+    <string name="question">Question:</string>
+    <string name="goToHomeToast">Going to Saved term page...</string>
+    <string name="goToHomeSnack">You return to home page.</string>
+    <string name="undo">Undo </string>
+    <string name="goToSaveList">You are going to favorite list.</string>
+    <string name="version">Version 1.0, created by Zhaoguo Han </string>
+    <string name="addFavorites">Add song to favorites</string>
+    <string name="confirm">Yes</string>
+    <string name="reject">No</string>
+    <string name="addQuestion">Add to favorites?</string>
+    <string name="addTitle">Add to favorites</string>
+    <string name="favoritesAdded"> added to favorite list</string>
+    <string name="songInFavorties">Song already in favorites</string>
+    <string name="deleteQuestion">Do you want to delete this song?</string>
+    <string name="deleteTitle">Delete</string>
+    <string name="deletedSong">You deleted </string>
+    <string name="returnHomeQuestion">Do you want to return the home page:</string>
+    <string name="title">Deezer Song</string>
+    <string name="favButton">Favorite List</string>
+    <string name="saveToList">Save to List</string>
+    <string name="songname">Song Name</string>
+    <string name="durationnumber">Duration</string>
+    <string name="albumname">Album Name</string>
+    <string name="returnStep">Return</string>
+    <string name="tianjiaosaveButton">Saved list</string>
+    <string name="inqureSongAction">Do you want see the song details or delete this song?</string>
+
+
+    <!-- Rick.-->
+    <string name="ziyaorecipename">Recipe info goes here</string>
+    <string name="ziyaorecipeInfoSum">Recipe Info Sum</string>
+    <string name="ziyaoSavedRecipes">Saved Recipes</string>
+    <string name="ziyaoSearch">Search</string>
+    <string name="ziyaoSearchTextgoeshere">Search Text goes here</string>
+    <string name="ziyaoRecipetitlegoeshere">Recipe title goes here</string>
+    <string name="ziyaoHomePage">Home Page</string>
+    <string name="ziyaoSearchRecipes">Search Recipes</string>
+    <string name="ziyaoSaveTheRecipe">Save the Recipe</string>
+    <string name="ziyaoAbout">About</string>
+    <string name="ziyaoDeleteRecipe">Delete Recipe</string>
+    <string name="ziyaogohome">Going to Home page...</string>
+    <string name="ziyaosearchRecipeMenu">Going to searching page...</string>
+    <string name="ziyaoaboutRecipeMenu">This application is the recipe search application created by Ziyao Tang.</string>
+    <string name="ziyaoaboutRecipeMenuAbout">About:</string>
+    <string name="ziyaodeleteRecipe">Question:</string>
+    <string name="ziyaodeleteRecipeAbout">Do you want to delete the message:</string>
+    <string name="ziyaoOK">OK</string>
+    <string name="ziyaoNO">No</string>
+    <string name="ziyaoYes">Yes</string>
+    <string name="ziyaoUndo">Undo</string>
+    <string name="ziyaodeleteM">You deleted message #</string>
+    <string name="yxAboutTitle">How to Use</string>
+    <string name="yxAboutUse">Instructions on how to use the interface:\n1. Enter a search term in the provided EditText.\n2. Click the Search button to retrieve definitions from the dictionary API.\n3. Click on a search result to see detailed information in a separate fragment.\n4. Click the Save icon to add a term to the saved terms list.\n5. Access the saved terms by clicking the Saved button.\n6. To delete a term, select it and choose the Delete icon from the menu.\n7. For more help, you can contact support.</string>
+    <string name="ziyaoSearching">Searching.....</string>
+    <string name="ziyaogosavedRecipeMenu">Going to searching page...</string>
+    <string name="ziyaosaveTheRecipe">You added the recipe :</string>
+    <string name="ziyaosearchTitle">Search Recipe</string>
+    <string name="ziyaodictionary">Go to Dictionary</string>
+
+
+    <string name="ziyaosongPage">Going to Song Project...</string>
+    <string name="ziyaoyxSunpage">Going to Sun Project...</string>
+    <string name="ziyaodictionarying">Going to Dictionary Project...</string>
+    <string name="helpRecipeMenu">1.Search Recipes:\nEnter the name or ingredients of the recipe you\'re looking for in the search bar.\nTap the search button to get a list of matching recipes.\n2.View Recipe Details:\nClick on a recipe from the list to view detailed information.\nExplore ingredients, cooking instructions, and more.\n3.Save Your Favorites:Found a recipe you love? \nClick on Save Recipe in the detailed view.\nYour saved recipes can be accessed from the Saved Recipes menu.</string>
+    <string name="helpziyao">Help</string>
+    <!--The following strings belong to Sun Activity-->
+    <string name="sun_toolbar_title">Sunrise &amp; Sunset</string>
+    <string name="sun_fav">Sunrise &amp; Sunset \n My Saved Sun </string>
+    <string name="sun_lat_hint">Latitude: </string>
+    <string name="sun_lng_hint">Longitude: </string>
+    <string name="sun_lat_text">Latitude</string>
+    <string name="sun_lng_text">Longitude</string>
+    <string name="sun_search_btn">Lookup</string>
+    <string name="sun_del_warning_text">Do you want to delete this record: </string>
+    <string name="sun_del_warning_title">Question: </string>
+    <string name="sun_del_text">Do you want to delete this record: </string>
+    <string name="sun_del_title">Question: </string>
+    <string name="sun_del_after">You deleted sun #</string>
+    <string name="sun_yes">Yes</string>
+    <string name="sun_no">No</string>
+    <string name="sun_about_title">About</string>
+    <string name="sun_about_detail">Sunrise &amp; Sunset, Version 1.2, created by Tianjiao</string>
+    <string name="sun_to_main">Back to main page</string>
+    <string name="sun_undo">Undo</string>
+    <string name="helptianjiao">help</string>
+    <string name="sun_help1">How to use:</string>
+    <string name="sun_help2"><![CDATA[
+1. This is a program that provides a query for sunrise and sunset by longitude and latitude information.\n
+2. Input the longitude and dimension information you need to query in the search box (the valid range of latitude and longitude is from -180 degrees to +180 degrees longitude, and the latitude is about -85 degrees to +85 degrees.)\n
+3. Click the "Lookup" button to view the sunrise and sunset times at the query address.\n
+4. Click the "save" icon in the menu to save the query address to the saved list.\n
+5. Click "Delete" icon to delete the saved list.
+
+    ]]></string>
+    <string name="sun_save_no_record_warning">No sun record selected</string>
+    <string name="sun_save_dupe_record_warning">Sun record already in your Favourite</string>
+    <string name="sun_save_success">Sun saved successfully</string>
+    <string name="sunrise_title">Sunrise</string>
+    <string name="sunset_title"> Sunset</string>
+    <string name="invalid_input_title">Invalid Input</string>
+    <string name="sun_refresh">Details</string>
+    <string name="sun_sun_api_not_available">Sun api not available</string>
+    <string name="sun_sun_api_status_not_ok">api status is not ok</string>
+    <string name="sun_found_nothing">sun_found_nothing</string>
+
+
+
 
 </resources>

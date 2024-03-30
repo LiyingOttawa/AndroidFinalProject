@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#DFDDE6">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/mysongToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentTop="true"
+        android:background="@color/my_primary"
+        android:elevation="4dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="Deezer" />
 
     <EditText
         android:id="@+id/editTextSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/mysongToolbar"
         android:hint="Enter artist name"
         android:padding="16dp" />
 
@@ -15,15 +28,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/editTextSearch"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:text="Search" />
+        android:layout_marginTop="5dp"
+        android:text="Search"
+        app:icon="?android:attr/actionModeFindDrawable" />
+
+    <Button
+        android:id="@+id/buttonMyFavorites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextSearch"
+        android:layout_marginStart="93dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="-409dp"
+        android:layout_toStartOf="@+id/buttonSearch"
+        android:layout_toEndOf="@+id/buttonSearch"
+        android:text="My Favorites"
+        app:icon="@android:drawable/btn_star_big_off" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewResults"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/buttonSearch"
-        android:layout_marginTop="16dp" />
+        android:layout_below="@id/buttonMyFavorites"
+        android:layout_marginTop="5dp"
+        android:background="@color/white" />
 
 </RelativeLayout>
