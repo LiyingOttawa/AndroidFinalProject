@@ -1,21 +1,33 @@
 package algonquin.cst2335.androidfinalproject.recipe;
+
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class RecipeDetail {
-    private int id;
+    @PrimaryKey
+    @ColumnInfo(name="id")
+    private long id;
+    @ColumnInfo(name="title")
     private String title;
+    @ColumnInfo(name="summary")
     private String summary;
+    @ColumnInfo(name="image")
+
+    private String image;
+    @ColumnInfo(name="instructions")
     private String instructions;
-    private String sourceUrl;
 
-
-    public RecipeDetail(int id, String title, String summary, String instructions, String sourceUrl) {
+    public RecipeDetail(long id, String title, String summary, String image, String instructions) {
         this.id = id;
         this.title = title;
         this.summary = summary;
+        this.image = image;
         this.instructions = instructions;
-        this.sourceUrl = sourceUrl;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -47,12 +59,11 @@ public class RecipeDetail {
         this.instructions = instructions;
     }
 
-    public String getSourceUrl() {
-        return sourceUrl;
+    public String getImage() {
+        return image;
     }
 
-    public void setSourceUrl(String sourceUrl) {
-        this.sourceUrl = sourceUrl;
+    public void setImage(String image) {
+        this.image = image;
     }
-
 }
