@@ -6,6 +6,12 @@
     android:orientation="vertical">
 
     <item
+        android:id="@+id/actionFavorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="My Favorite"
+        app:showAsAction="ifRoom|collapseActionView"/>
+    <item
         android:id="@+id/actionSearch"
         android:icon="@android:drawable/ic_menu_search"
         android:title="Search"

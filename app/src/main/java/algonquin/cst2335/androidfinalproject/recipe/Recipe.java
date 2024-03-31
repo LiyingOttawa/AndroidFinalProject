@@ -1,16 +1,20 @@
 package algonquin.cst2335.androidfinalproject.recipe;
 public class Recipe {
-    private int id;
+    private long id;
     private String title;
     private String image; //image url
 
-    public Recipe(int id, String title, String image) {
+    public Recipe(long id, String title, String image) {
         this.id = id;
         this.title = title;
         this.image = image;
     }
 
-    public int getId() {
+    public Recipe(RecipeDetail rcp) {
+        this(rcp.getId(),rcp.getTitle(),rcp.getImage());
+    }
+
+    public long getId() {
         return id;
     }
 
