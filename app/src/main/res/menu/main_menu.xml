@@ -29,6 +29,6 @@
         app:showAsAction="never" />
     <item
         android:id="@+id/about"
-        android:title="@string/ziyaoAbout"
+        android:title="@string/SongAbout"
         app:showAsAction="never" />
 </menu>
