@@ -61,6 +61,11 @@ public class Dict {
         this.summary = summary;
     }
 
+    // This method is synonymous with getSummary() for the sake of addressing the error.
+    public String getDictDefinition() {
+        return getSummary();
+    }
+
     public String getSrcUrl() {
         return srcUrl;
     }

@@ -10,6 +10,7 @@
     <string name="button_message4">Deezer Song Search API </string>
 
     <!--   Dict Strings -->
+
     <string name="dict_titleText">Dictionary</string>
     <string name="dict_hintText">Enter your word here</string>
     <string name="dict_searchTitle">Search</string>
@@ -26,6 +27,8 @@
     <string name="dict_backToMainItem">Go to main page</string>
     <string name="dict_helpItem">Help</string>
     <string name="dict_aboutItem">About</string>
+
+
 
     <string name="dict_notFoundToast">Sorry, nothing found.</string>
     <string name="dict_notAvailableToast">This word is not available.</string>
@@ -204,6 +207,5 @@
 
     <string name="save">save</string>
     <string name="remove">remove</string>
-
 
 </resources>

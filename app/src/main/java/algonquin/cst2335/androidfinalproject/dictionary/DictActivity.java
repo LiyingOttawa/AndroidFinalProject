@@ -84,12 +84,13 @@ public class DictActivity extends AppCompatActivity {
      * Observes selected dictionaries and updates the UI accordingly.
      */
     private void observeSelectedDicts() {
-        dictModel.selectedDicts.observe(this, selectedDicts -> {
-            if (selectedDicts != null) {
-                displayDictDetails(selectedDicts);
+        dictModel.selectedDicts.observe(this, selectedDict -> {
+            if (selectedDict != null) {
+                displayDictDetails(selectedDict);
             }
         });
     }
+
 
     /**
      * Loads dictionaries from the database asynchronously.
@@ -216,7 +217,7 @@ public class DictActivity extends AppCompatActivity {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         dialogBuilder.setTitle(selectedDict.getDictName());
         dialogBuilder.setMessage(selectedDict.getDictDefinition());
-        dialogBuilder.setPositiveButton(R.string.dict_okButton, null);
+        dialogBuilder.setPositiveButton(R.string.dict_ok, null);
         dialogBuilder.show();
     }
 
@@ -240,7 +241,7 @@ public class DictActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_clear) {
+        if (id == R.id.deleteItem) {
             binding.dictTextInput.setText("");
             dicts.clear();
             dictAdapter.notifyDataSetChanged();
@@ -258,7 +259,7 @@ public class DictActivity extends AppCompatActivity {
 
         public MyRowHolder(View itemView) {
             super(itemView);
-            dictName = itemView.findViewById(R.id.dict_name);
+            dictName = itemView.findViewById(R.id.dictResult);
         }
     }
 }

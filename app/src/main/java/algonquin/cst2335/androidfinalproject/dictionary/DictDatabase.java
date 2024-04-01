@@ -19,5 +19,5 @@ public abstract class DictDatabase extends RoomDatabase {
      *
      * @return An instance of {@link DictDAO} for database operations.
      */
-    public abstract DictDAO DictDAO();
+    public abstract DictDAO dictDAO(); // Method name starts with a lowercase letter
 }
