@@ -2,6 +2,7 @@ package algonquin.cst2335.androidfinalproject.song;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +16,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -24,16 +26,23 @@ import java.util.concurrent.atomic.AtomicReference;
 import algonquin.cst2335.androidfinalproject.MainActivity;
 import algonquin.cst2335.androidfinalproject.R;
 import algonquin.cst2335.androidfinalproject.databinding.ActivitySongMainBinding;
+import algonquin.cst2335.androidfinalproject.song.SongDao;
+import algonquin.cst2335.androidfinalproject.song.SongAdapter;
 
-public class MainSongActivity extends AppCompatActivity {
 
+public class MainSongActivity extends AppCompatActivity implements SongAdapter.OnFavoriteClickListener {
     private EditText editTextSearch;
     private Button buttonSearch;
+    protected Button buttonAddToFavorites;
+    protected Button buttonMyFavorites;
     private RecyclerView recyclerViewResults;
     private SongAdapter songAdapter;
 
+    private SongDao songDAO;
+    private boolean showFavorites = false;
     protected ActivitySongMainBinding binding;
 
+    private static final String DB_NAME = "song_DB";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,12 +57,21 @@ public class MainSongActivity extends AppCompatActivity {
 
         editTextSearch = findViewById(R.id.editTextSearch);
         buttonSearch = findViewById(R.id.buttonSearch);
+        buttonAddToFavorites = findViewById(R.id.buttonAddToFavorites);
+        buttonMyFavorites = findViewById(R.id.buttonMyFavorites);
         recyclerViewResults = findViewById(R.id.recyclerViewResults);
         recyclerViewResults.setLayoutManager(new LinearLayoutManager(this));
 
+        // Initialize SongAdapter
         songAdapter = new SongAdapter();
+        // Set the SongDao for the adapter
+        songAdapter.setSongDao(songDAO);
+
         recyclerViewResults.setAdapter(songAdapter);
 
+        songAdapter.setOnFavoriteClickListener(this); // Set the activity as the listener
+
+        initDatabase();
         buttonSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,9 +84,42 @@ public class MainSongActivity extends AppCompatActivity {
                 }
             }
         });
+        buttonMyFavorites.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFavorites = !showFavorites;
+                if (showFavorites) {
+                    // Display favorite songs
+                    displayFavoriteSongs();
+                } else {
+                    // Display search results
+                    performSearch(editTextSearch.getText().toString().trim());
+                }
+            }
+        });
+        // Set click listener for the RecyclerView item buttons
+    }
+    private void initDatabase() {
+        // Initialize database and DAO
+        SongDatabase db = Room.databaseBuilder(getApplicationContext(),
+                        SongDatabase.class, DB_NAME)
+                .fallbackToDestructiveMigration()
+                .build();
+        songDAO = db.songDao();
+        songAdapter.setSongDao(songDAO);
+    }
+
+    @Override
+    public void onFavoriteClick(Song song) {
+        // Handle favorite button click
+        Toast.makeText(this, "Added to Favorites: " + song.getTitle(), Toast.LENGTH_SHORT).show();
     }
 
     private void performSearch(String artistName) {
+
+        songAdapter.setShowAddButton(true);
+        songAdapter.setShowDeleteButton(false);
+
         // Fetch data from Deezer API using Volley
         DeezerApi.searchArtist(getApplicationContext(), artistName, new DeezerApi.Callback<List<Song>>() {
             @Override
@@ -82,6 +133,49 @@ public class MainSongActivity extends AppCompatActivity {
             }
         });
     }
+    // Method to display favorite songs
+    private void displayFavoriteSongs() {
+
+        // show the Delete Button
+        songAdapter.setShowDeleteButton(true);
+        songAdapter.setShowAddButton(false);
+        // Use AsyncTask or a background thread to perform the database query asynchronously
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                // Retrieve favorite songs from the database using the DAO
+                List<Song> favoriteSongs = songDAO.getAllSongs();
+                // Update the UI on the main thread with the retrieved data
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        songAdapter.setSongList(favoriteSongs);
+                    }
+                });
+            }
+        });
+    }
+    // Method to delete a song from favorites
+    public void deleteFavoriteSong(Song song) {
+        // Use AsyncTask or a background thread to delete the song from the database asynchronously
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                // Delete the song from the database using the DAO
+                songDAO.delete(song);
+                // Update the UI on the main thread to reflect the changes (if needed)
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        // You may need to update the UI after deleting the song
+                        // For example, refresh the list of favorite songs
+                        displayFavoriteSongs();
+                    }
+                });
+            }
+        });
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.song_menu, menu);

@@ -25,6 +25,12 @@ public class DeezerApi {
     private static final String TAG = "DeezerApi";
     private static final String SEARCH_ARTIST_URL = "https://api.deezer.com/search/artist/?q=";
 
+    // Define the callback interface
+    public interface Callback<T> {
+        void onSuccess(T response);
+        void onError(String errorMessage);
+    }
+
     public static void searchArtist(Context context, String artistName, final Callback<List<Song>> callback) {
         try {
             // Encode artistName
@@ -107,12 +113,6 @@ public class DeezerApi {
 
     // Method to parse the response and extract the list of songs
 
-
-    // Define the callback interface
-    public interface Callback<T> {
-        void onSuccess(T response);
-        void onError(String errorMessage);
-    }
 
     private static List<Song> parseSongsFromResponse(JSONObject response) {
         List<Song> songs = new ArrayList<>();

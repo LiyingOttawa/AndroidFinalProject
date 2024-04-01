@@ -10,7 +10,7 @@ import androidx.room.RoomDatabase;
 public abstract class SongDatabase extends RoomDatabase {
     public abstract SongDao songDao();
 
-    private static final String DATABASE_NAME = "song_database";
+    private static final String DATABASE_NAME = "favorite_database";
     private static SongDatabase instance;
 
     public static synchronized SongDatabase getInstance(Context context) {
