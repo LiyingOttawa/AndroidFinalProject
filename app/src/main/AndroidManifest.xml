@@ -28,5 +28,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".song.MainSongActivity" />
+        <activity android:name=".dictionary.DictActivity" />
     </application>
 </manifest>
