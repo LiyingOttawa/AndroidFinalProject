@@ -35,7 +35,9 @@ android {
 }
 
 dependencies {
-
+    var room_version = "2.6.1"
+    implementation ("androidx.room:room-runtime:$room_version")
+    annotationProcessor ("androidx.room:room-compiler:$room_version")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
@@ -43,12 +45,9 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
     implementation("androidx.navigation:navigation-fragment:2.7.7")
     implementation("androidx.navigation:navigation-ui:2.7.7")
-    implementation ("com.android.volley:volley:1.2.1")          // add by Han at 03/23/2024
-    implementation ("androidx.room:room-runtime:2.4.0")         // add by Han at 03/23/2024
-    implementation ("androidx.room:room-ktx:2.4.0")             // add by Han at 03/23/2024
-    implementation("com.squareup.picasso:picasso:2.71828")      // add by Han at 03/29/2024
-    annotationProcessor ("androidx.room:room-compiler:2.4.0")   // add by Han at 03/23/2024
 
+    implementation ("com.android.volley:volley:1.2.1")
+    implementation("com.squareup.picasso:picasso:2.71828")
     testImplementation("org.mockito:mockito-core:3.12.4")       // add by Han at 03/27/2024
     testImplementation("junit:junit:4.13.2")
 
