@@ -81,7 +81,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
                  Executor thread = Executors.newSingleThreadExecutor();
                  thread.execute(() ->
                  {
-                     boolean isToSave= menu.findItem(R.id.actionSave).getTitle().equals("Save");
+                     boolean isToSave= menu.findItem(R.id.actionSave).getTitle().equals(getString(R.string.save));
                      if(isToSave && recipe != null)
                      {
                          mDAO.createRecipe(recipe);
@@ -89,7 +89,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
                      else {
                          mDAO.deleteMessage(recipe);
                      }
-                     runOnUiThread( () -> menu.findItem(R.id.actionSave).setTitle(isToSave?"Remove":"Save"));
+                     runOnUiThread( () -> menu.findItem(R.id.actionSave).setTitle(isToSave?getString(R.string.remove):getString(R.string.save)));
                  });
                  return false;
              }

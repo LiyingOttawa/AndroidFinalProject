@@ -8,5 +8,10 @@
     <string name="button_message2">Recipe Search</string>
     <string name="button_message3">Dictionary API </string>
     <string name="button_message4">Deezer Song Search API </string>
+    
+    <string name="save">Save </string>
+    <string name="remove">Remove </string>
+
+
 
 </resources>
