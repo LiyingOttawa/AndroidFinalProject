@@ -8,15 +8,32 @@
     <string name="button_message2">Recipe Search</string>
     <string name="button_message3">Dictionary API </string>
     <string name="button_message4">Deezer Song Search API </string>
-    
-    <string name="save">Save </string>
-    <string name="remove">Remove </string>
+
+    <!-- recipe-->
+    <string name="btn_search">Search</string>
+    <string name="btn_save">Save </string>
+    <string name="btn_remove">Remove </string>
+    <string name="btn_about">About</string>
+    <string name="btn_instruction">Instruction</string>
+
+    <string name="toastAbout">This application is the final project of our class CST2355</string>
+    <string name="recipeAboutuse">Instructions on how to use the interface:
+        \n1. Enter a search term in the middle of the provided EditText.
+        \n2. Click the Search button to retrieve data from the Recipe Search.
+        \n3. Click the MyFavorite button to access the favorite list which recipe you saved before.
+        \n4. Click on a recipe to see detailed information in a separate fragment.
+        \n5. Click the Save button to add a recipe to MyFavorite in the fragment.
+        \n6. To remove a recipe, select it and choose the Remove button.
+        \n7. The toolbar provide access to Sun page, Receipe page, Dictionary page and Song page.
+        \n8. Each page click the return will back to the previous page.
+        \n9. For more help, you can contact support.</string>
+
 
 
 
     <!-- song-->
     <string name="yxeditSearchName">Enter word to search</string>
-    <string name="yxSearchBtNname">Seach</string>
+    <string name="yxSearchBtNname">Search</string>
     <string name="yxSaveBtnName">See Saved Term</string>
     <string name="Save_name">Saved Term</string>
     <string name="About_name">About</string>
