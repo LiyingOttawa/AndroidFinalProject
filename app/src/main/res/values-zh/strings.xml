@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AndroidFinalProject</string>
+    <string name="title_home">主页</string>
+    <string name="title_dashboard">操作台</string>
+    <string name="title_notifications">提示</string>
+    <string name="button_message1">日出日落查询</string>
+    <string name="button_message2">食谱查询</string>
+    <string name="button_message3">字典查询</string>
+    <string name="button_message4">歌曲查询</string>
+    <string name="save">保存</string>
+    <string name="remove">移除</string>
+</resources>
