@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="textViewSearchTerm" type="id" />
+    <item name="dateTextView" type="id" />
+    <item name="sunriseTextView" type="id" />
+    <item name="sunsetTextView" type="id" />
+</resources>
