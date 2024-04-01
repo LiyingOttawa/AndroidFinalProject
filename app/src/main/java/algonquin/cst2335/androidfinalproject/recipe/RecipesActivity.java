@@ -142,6 +142,7 @@ public class RecipesActivity extends AppCompatActivity implements RecipesAdapter
     }
 
     private void filter(String query) {
+        mQueue.cancelAll(TAG);
         String url = String.format("https://api.spoonacular.com/recipes/complexSearch?query=%s&apiKey=%s",query,"c918ec43605843bfbbb1e58441d40b7c");
         JsonObjectRequest request  = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override

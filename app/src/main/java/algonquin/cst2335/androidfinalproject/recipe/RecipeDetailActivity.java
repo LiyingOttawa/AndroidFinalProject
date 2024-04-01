@@ -6,6 +6,7 @@ import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -116,8 +117,8 @@ public class RecipeDetailActivity extends AppCompatActivity {
                             response.getString("image"),
                             response.getString("instructions"));
                     binding.recipeTitle.setText(response.getString("title"));
-                    binding.recipeSummary.setText(response.getString("summary"));
-                    binding.recipeInstructions.setText(response.getString("instructions"));
+                    binding.recipeSummary.setText(Html.fromHtml(response.getString("summary")));
+                    binding.recipeInstructions.setText(Html.fromHtml(response.getString("instructions")));
                     Picasso.get().load(response.getString("image")).into(binding.recipeImage);
 
                 } catch (JSONException e) {
