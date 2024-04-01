@@ -29,5 +29,6 @@
         </activity>
         <activity android:name=".song.MainSongActivity" />
         <activity android:name=".dictionary.DictActivity" />
+        <activity android:name=".ui.SunriseSunsetLookup" />
     </application>
 </manifest>

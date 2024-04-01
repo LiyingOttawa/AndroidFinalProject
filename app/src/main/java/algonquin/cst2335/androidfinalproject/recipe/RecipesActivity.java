@@ -44,6 +44,7 @@ import algonquin.cst2335.androidfinalproject.R;
 import algonquin.cst2335.androidfinalproject.databinding.ActivityRecipesBinding;
 import algonquin.cst2335.androidfinalproject.dictionary.DictActivity;
 import algonquin.cst2335.androidfinalproject.song.MainSongActivity;
+import algonquin.cst2335.androidfinalproject.ui.SunriseSunsetLookup;
 
 public class RecipesActivity extends AppCompatActivity implements RecipesAdapter.OnClickRecipeListener {
     private static final String TAG = "RecipesActivity";
@@ -146,13 +147,13 @@ public class RecipesActivity extends AppCompatActivity implements RecipesAdapter
         }
         else if(id==R.id.goingTosunApp)
         {
-
+            Intent intent = new Intent(this, SunriseSunsetLookup.class); // Assuming SearchDictActivity is the correct class name
+            startActivity(intent);
             return true;
         }
         else if(id==R.id.ritaRecipePage)
         {
-            Intent intent = new Intent(this, RecipesActivity.class); // Assuming SearchDictActivity is the correct class name
-            startActivity(intent);
+
             return true;
         }
         else if(id==R.id.ritaDictionary)

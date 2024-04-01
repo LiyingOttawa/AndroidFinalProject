@@ -26,8 +26,11 @@ import java.util.concurrent.atomic.AtomicReference;
 import algonquin.cst2335.androidfinalproject.MainActivity;
 import algonquin.cst2335.androidfinalproject.R;
 import algonquin.cst2335.androidfinalproject.databinding.ActivitySongMainBinding;
+import algonquin.cst2335.androidfinalproject.dictionary.DictActivity;
+import algonquin.cst2335.androidfinalproject.recipe.RecipesActivity;
 import algonquin.cst2335.androidfinalproject.song.SongDao;
 import algonquin.cst2335.androidfinalproject.song.SongAdapter;
+import algonquin.cst2335.androidfinalproject.ui.SunriseSunsetLookup;
 
 
 public class MainSongActivity extends AppCompatActivity implements SongAdapter.OnFavoriteClickListener {
@@ -214,7 +217,32 @@ public class MainSongActivity extends AppCompatActivity implements SongAdapter.O
             Toast.makeText(this, showText, Toast.LENGTH_SHORT).show();
             startActivity(songSavedList);
             return true;
-        } else if (id == R.id.menu_about) {
+        }
+        else if(id==R.id.goingTosunApp)
+        {
+            Intent intent = new Intent(this, SunriseSunsetLookup.class); // Assuming SearchDictActivity is the correct class name
+            startActivity(intent);
+            return true;
+        }
+        else if(id==R.id.ritaRecipePage)
+        {
+            Intent intent = new Intent(this, RecipesActivity.class); // Assuming SearchDictActivity is the correct class name
+            startActivity(intent);
+            return true;
+        }
+        else if(id==R.id.ritaDictionary)
+        {
+            Intent intent = new Intent(this, DictActivity.class); // Assuming SearchDictActivity is the correct class name
+            startActivity(intent);
+            return true;
+        }
+        else if(id==R.id.goingToSongApp)
+        {
+            Intent intent = new Intent(this, MainSongActivity.class); // Assuming SearchDictActivity is the correct class name
+            startActivity(intent);
+            return true;
+        }
+        else if (id == R.id.menu_about) {
             // Code for showing the version info
             Toast.makeText(this, getString(R.string.version), Toast.LENGTH_LONG).show();
             return true;

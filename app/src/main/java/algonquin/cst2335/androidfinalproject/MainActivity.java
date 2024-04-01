@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import algonquin.cst2335.androidfinalproject.dictionary.DictActivity;
 import algonquin.cst2335.androidfinalproject.recipe.RecipesActivity;
 import algonquin.cst2335.androidfinalproject.song.MainSongActivity;
+import algonquin.cst2335.androidfinalproject.ui.SunriseSunsetLookup;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -27,6 +28,13 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar myToolbar = findViewById(R.id.main_toolbar);
         setSupportActionBar(myToolbar);
+        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SunriseSunsetLookup.class);
+                startActivity(intent);
+            }
+        });
 
         findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
             @Override

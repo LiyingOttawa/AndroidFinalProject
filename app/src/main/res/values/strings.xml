@@ -8,6 +8,12 @@
     <string name="button_message2">Recipe Search</string>
     <string name="button_message3">Dictionary API </string>
     <string name="button_message4">Deezer Song Search API </string>
+    <string name="Lookup">lookup</string>
+    <string name="Save_location">Save Location</string>
+    <string name="Delete">Delete</string>
+    <string name="Favorite">Favorite</string>
+    <string name="latitudeEditText">Latitude</string>
+    <string name="LongitudeEditText">Longitude</string>
 
     <!--   Dict Strings -->
 
