@@ -26,8 +26,6 @@ import java.util.concurrent.atomic.AtomicReference;
 import algonquin.cst2335.androidfinalproject.MainActivity;
 import algonquin.cst2335.androidfinalproject.R;
 import algonquin.cst2335.androidfinalproject.databinding.ActivitySongMainBinding;
-import algonquin.cst2335.androidfinalproject.song.SongDao;
-import algonquin.cst2335.androidfinalproject.song.SongAdapter;
 
 
 public class MainSongActivity extends AppCompatActivity implements SongAdapter.OnFavoriteClickListener {
@@ -178,7 +176,7 @@ public class MainSongActivity extends AppCompatActivity implements SongAdapter.O
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.song_menu, menu);
+        getMenuInflater().inflate(R.menu.common_menu, menu);
         return true;
     }
 
@@ -214,11 +212,11 @@ public class MainSongActivity extends AppCompatActivity implements SongAdapter.O
             Toast.makeText(this, showText, Toast.LENGTH_SHORT).show();
             startActivity(songSavedList);
             return true;
-        } else if (id == R.id.song_menu_about) {
+        } else if (id == R.id.menu_about) {
             // Code for showing the version info
             Toast.makeText(this, getString(R.string.version), Toast.LENGTH_LONG).show();
             return true;
-        } else if (id == R.id.song_menu_help) {
+        } else if (id == R.id.menu_help) {
             // Code for showing help/instructions
             AlertDialog.Builder instructionsDialog = new AlertDialog.Builder(this);
             instructionsDialog.setMessage(R.string.SongAboutuse)
