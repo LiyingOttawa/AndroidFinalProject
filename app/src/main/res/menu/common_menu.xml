@@ -10,38 +10,38 @@
         android:title="@string/returnStep"
         app:showAsAction="always" />
 
-
     <item
-        android:id="@+id/Dictionary"
-        android:icon="@drawable/dictionary_icon"
-        android:title="@string/goToDictionaryPage"
+        android:id="@+id/showSaveList"
+        android:icon="@android:drawable/star_big_on"
+        android:title="@string/favButton"
         app:showAsAction="always" />
 
 
     <item
-        android:id="@+id/RecipePage"
-        android:icon="@drawable/recipe_icon"
+        android:id="@+id/ritaRecipePage"
+        android:icon="@android:drawable/ic_menu_agenda"
         android:title="@string/goToRecipePage"
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/sunApp"
-        android:icon="@drawable/sun_icon"
+        android:id="@+id/ritaDictionary"
+        android:icon="@android:drawable/btn_plus"
+        android:title="@string/goToDictionaryPage"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/goingTosunApp"
+        android:icon="@android:drawable/ic_menu_mylocation"
         android:title="@string/goToSunPage"
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/songApp"
-        android:icon="@drawable/song_icon"
-        android:title="@string/goToSongPage"
-        app:showAsAction="always" />
-    <item
-        android:id="@+id/song_menu_about"
+        android:id="@+id/menu_about"
         android:title="@string/About_name"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/song_menu_help"
+        android:id="@+id/menu_help"
         android:title="@string/How_to_use_name"
         app:showAsAction="never" />
 

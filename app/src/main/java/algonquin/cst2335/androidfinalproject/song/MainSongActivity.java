@@ -178,7 +178,7 @@ public class MainSongActivity extends AppCompatActivity implements SongAdapter.O
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.song_menu, menu);
+        getMenuInflater().inflate(R.menu.common_menu, menu);
         return true;
     }
 
@@ -207,15 +207,22 @@ public class MainSongActivity extends AppCompatActivity implements SongAdapter.O
                                 .show();
                     }).create().show();
             return true;
-        } else if (id == R.id.song_menu_about) {
+        } else if (id == R.id.showSaveList) {
+            // Code for showing the saved list
+            Intent songSavedList = new Intent(MainSongActivity.this, MainSongActivity.class);
+            CharSequence showText = getString(R.string.goToSaveList);
+            Toast.makeText(this, showText, Toast.LENGTH_SHORT).show();
+            startActivity(songSavedList);
+            return true;
+        } else if (id == R.id.menu_about) {
             // Code for showing the version info
             Toast.makeText(this, getString(R.string.version), Toast.LENGTH_LONG).show();
             return true;
-        } else if (id == R.id.song_menu_help) {
+        } else if (id == R.id.menu_help) {
             // Code for showing help/instructions
             AlertDialog.Builder instructionsDialog = new AlertDialog.Builder(this);
             instructionsDialog.setMessage(R.string.SongAboutuse)
-                    .setTitle(R.string.About_name)
+                    .setTitle(R.string.yxAboutTitle)
                     .setNegativeButton(getString(R.string.confirm), (dialog, cl) -> {})
                     .create().show();
             return true;
