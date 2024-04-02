@@ -3,7 +3,9 @@ package algonquin.cst2335.androidfinalproject.recipe;
 import static java.util.Locale.filter;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.room.Room;
@@ -26,6 +28,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,13 +39,14 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import algonquin.cst2335.androidfinalproject.MainActivity;
 import algonquin.cst2335.androidfinalproject.R;
 import algonquin.cst2335.androidfinalproject.databinding.ActivityRecipesBinding;
-import algonquin.cst2335.androidfinalproject.databinding.RecipeItemBinding;
 
 public class RecipesActivity extends AppCompatActivity implements RecipesAdapter.OnClickRecipeListener {
     private static final String TAG = "RecipesActivity";
     private ActivityRecipesBinding binding;
+//    private ToolbarLayoutBinding toolbarLayoutBinding;
     private RecipesViewModel viewModel;
     private ArrayList<Recipe> recipeList;
     private RecipesAdapter adapter;
@@ -56,6 +60,8 @@ public class RecipesActivity extends AppCompatActivity implements RecipesAdapter
         super.onCreate(savedInstanceState);
         binding = ActivityRecipesBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        setSupportActionBar(binding.myToolbar);
+
         binding.rvRecipes.setLayoutManager(new LinearLayoutManager(this));
         SearchView searchView=binding.searchView;
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -97,16 +103,70 @@ public class RecipesActivity extends AppCompatActivity implements RecipesAdapter
         searchView.setQuery(query,false);
     }
 
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        super.onCreateOptionsMenu(menu);
+//        getMenuInflater().inflate(R.menu.common_menu, menu);
+//        getMenuInflater().inflate(R.menu.search_recipe_menu, menu);
+//
+//
+//        menu.findItem(R.id.actionFavorite).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+//            @Override
+//            public boolean onMenuItemClick(@NonNull MenuItem item) {
+//                Executor thread = Executors.newSingleThreadExecutor();
+//                thread.execute(() ->
+//                {
+//                    List<Recipe> recipes = new ArrayList<Recipe>();
+//
+//                    for (RecipeDetail rcp:mDAO.retrieveAll()) {
+//                        recipes.add(new Recipe(rcp));
+//                    }
+//                    recipeList.clear();
+//                    recipeList.addAll( recipes); //Once you get the data from database
+//
+//                    runOnUiThread( () ->  {
+//                        adapter.notifyDataSetChanged();
+//                    }); //You can then load the RecyclerView
+//                });
+//
+//                return false;
+//            }
+//        });
+//        return true;
+//    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.search_recipe_menu, menu);
+        getMenuInflater().inflate(R.menu.common_menu, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
 
-        menu.findItem(R.id.actionFavorite).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(@NonNull MenuItem item) {
-                Executor thread = Executors.newSingleThreadExecutor();
+        if (id == R.id.returnHomeMenu) {
+            // Put your code for returning home here
+            AlertDialog.Builder builder = new AlertDialog.Builder(RecipesActivity.this);
+            builder.setMessage(getString(R.string.goToHomeSnack))
+                    .setTitle(R.string.question)
+                    .setNegativeButton(getString(R.string.reject), (a, b) -> {})
+                    .setPositiveButton(getString(R.string.confirm), (a, b) -> {
+                        Intent songSavedList = new Intent(RecipesActivity.this, MainActivity.class);
+                        CharSequence text3 = getString(R.string.goToHomeSnack);
+                        Toast.makeText(this, text3, Toast.LENGTH_SHORT).show();
+                        startActivity(songSavedList);
+                        Snackbar.make(binding.myToolbar, getString(R.string.goToHomeSnack), Snackbar.LENGTH_LONG)
+                                .setAction(getString(R.string.undo), clk -> {
+                                    Intent mainPage = new Intent(RecipesActivity.this, MainActivity.class);
+                                    CharSequence text1 = getResources().getString(R.string.goToSunPage);
+                                    Toast.makeText(this, text1, Toast.LENGTH_SHORT).show();
+                                    startActivity(mainPage);
+                                })
+                                .show();
+                    }).create().show();
+            return true;
+        } else if (id == R.id.showSaveList) {
+            Executor thread = Executors.newSingleThreadExecutor();
                 thread.execute(() ->
                 {
                     List<Recipe> recipes = new ArrayList<Recipe>();
@@ -119,13 +179,26 @@ public class RecipesActivity extends AppCompatActivity implements RecipesAdapter
 
                     runOnUiThread( () ->  {
                         adapter.notifyDataSetChanged();
+                        CharSequence showText = getString(R.string.goToSaveList);
+                        Toast.makeText(this, showText, Toast.LENGTH_SHORT).show();
                     }); //You can then load the RecyclerView
                 });
-
-                return false;
-            }
-        });
-        return true;
+            return true;
+        } else if (id == R.id.menu_about) {
+            // Code for showing the version info
+            Toast.makeText(this, getString(R.string.version), Toast.LENGTH_LONG).show();
+            return true;
+        } else if (id == R.id.menu_help) {
+            // Code for showing help/instructions
+            AlertDialog.Builder instructionsDialog = new AlertDialog.Builder(this);
+            instructionsDialog.setMessage(R.string.SongAboutuse)
+                    .setTitle(R.string.yxAboutTitle)
+                    .setNegativeButton(getString(R.string.confirm), (dialog, cl) -> {})
+                    .create().show();
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override

@@ -175,8 +175,8 @@
     <string name="sun_sun_api_not_available">Sun api not available</string>
     <string name="sun_sun_api_status_not_ok">api status is not ok</string>
     <string name="sun_found_nothing">sun_found_nothing</string>
-
-
+    <string name="save">save</string>
+    <string name="remove">remove</string>
 
 
 </resources>

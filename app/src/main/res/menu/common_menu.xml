@@ -36,12 +36,12 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/song_menu_about"
+        android:id="@+id/menu_about"
         android:title="@string/About_name"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/song_menu_help"
+        android:id="@+id/menu_help"
         android:title="@string/How_to_use_name"
         app:showAsAction="never" />
 
