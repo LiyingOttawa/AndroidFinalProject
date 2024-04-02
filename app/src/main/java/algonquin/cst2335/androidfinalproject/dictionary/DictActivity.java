@@ -25,6 +25,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,6 +37,7 @@ import java.util.ArrayList;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import algonquin.cst2335.androidfinalproject.MainActivity;
 import algonquin.cst2335.androidfinalproject.R;
 import algonquin.cst2335.androidfinalproject.databinding.ActivityDictBinding;
 import algonquin.cst2335.androidfinalproject.databinding.SearchDictBinding;
@@ -215,24 +217,44 @@ public class DictActivity extends AppCompatActivity {
      * Displays the details of a selected dictionary entry.
      * @param selectedDict The selected dictionary entry.
      */
-    /**
-     * Displays the details of a selected dictionary entry.
-     * @param selectedDict The selected dictionary entry.
-     */
     private void displayDictDetails(Dict selectedDict) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-        dialogBuilder.setTitle(selectedDict.getDictName());
-        dialogBuilder.setMessage(selectedDict.getDictDefinition());
-        dialogBuilder.setPositiveButton(R.string.dict_ok, null);
-        dialogBuilder.setNegativeButton(R.string.dict_addItem, new DialogInterface.OnClickListener() {
+        dialogBuilder.setTitle(selectedDict.getDictName()); // Set the title of the dialog to the dictionary name
+        dialogBuilder.setMessage(selectedDict.getDictDefinition()); // Set the message of the dialog to the dictionary definition
+
+        dialogBuilder.setPositiveButton(R.string.dict_addItem, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                saveDefinition(selectedDict);
-                Toast.makeText(DictActivity.this, "Definition saved!", Toast.LENGTH_SHORT).show();
+                saveDefinition(selectedDict); // Save the definition
+                Toast.makeText(DictActivity.this, "Definition saved!", Toast.LENGTH_SHORT).show(); // Show confirmation toast
             }
         });
+
+        dialogBuilder.setNegativeButton(R.string.dict_deleteItem, (dialog, which) -> {
+            // Temporarily save the deleted item in case the user wants to undo the deletion
+            final Dict tempDeletedDict = selectedDict;
+
+            // Delete the definition from the database
+            deleteDefinition(tempDeletedDict);
+
+            // Show a Snackbar with an Undo option instead of a Toast message
+            Snackbar.make(findViewById(android.R.id.content), "Definition deleted", Snackbar.LENGTH_LONG)
+                    .setAction("Undo", view -> {
+                        // Undo the deletion: save the deleted item back to the database
+                        saveDefinition(tempDeletedDict);
+                        Toast.makeText(DictActivity.this, "Deletion undone!", Toast.LENGTH_SHORT).show();
+                    }).show();
+        });
+
         dialogBuilder.show();
     }
+
+
+    private void deleteDefinition(Dict dict) {
+        Executor thread = Executors.newSingleThreadExecutor();
+        thread.execute(() -> dictDAO.deleteDict(dict));
+    }
+
 
     /**
      * Saves the given dictionary entry to the database.
@@ -250,33 +272,42 @@ public class DictActivity extends AppCompatActivity {
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.dict_menu, menu);
-        return true;
+        return true; // Return true to display the menu
     }
 
-    /**
-     * Handles selections of menu options.
-     * @param item The menu item that was selected.
-     * @return False to allow normal menu processing to proceed, true to consume it here.
-     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.deleteItem) {
-            binding.dictTextInput.setText("");
-            dicts.clear();
-            dictAdapter.notifyDataSetChanged();
+        if (id == R.id.favoriteItem) {
+            // Corrected Intent to start a new activity
+            Intent intent = new Intent(this, DictActivity.class); // Assuming SearchDictActivity is the correct class name
+            startActivity(intent);
             return true;
-        } else if(id == R.id.favoriteItem) {
-            DictDetailsFragment detailsFragment = new DictDetailsFragment();
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.searchFragmentLocation, detailsFragment)
-                    .commit();
+        }else if(id == R.id.aboutDict) {
+            // Toast message about the author
+            Toast.makeText(this, R.string.dict_aboutToast, Toast.LENGTH_LONG).show();
+            return true;
+        }else if(id == R.id.dictBackToMainItem){
+            // May modify this code to start Main PAGE!
+            Intent intent = new Intent(this, DictActivity.class); // Assuming SearchDictActivity is the correct class name
+            startActivity(intent);
             return true;
         }
+        else if(id == R.id.helpItem){
+            new AlertDialog.Builder(this)
+                    .setTitle("Help")
+                    .setMessage(R.string.dict_helpAlert)
+                    .setPositiveButton(android.R.string.ok, null)
+                    .show();
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
+
 
 
     /**

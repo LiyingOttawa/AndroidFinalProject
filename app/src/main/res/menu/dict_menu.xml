@@ -10,17 +10,6 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/addItem"
-        android:icon="@drawable/add"
-        android:title="@string/dict_addItem"
-        app:showAsAction="always" />
-
-    <item
-        android:id="@+id/deleteItem"
-        android:icon="@drawable/delete"
-        android:title="@string/dict_deleteItem"
-        app:showAsAction="always" />
-    <item
         android:id="@+id/dictBackToMainItem"
         android:title="@string/dict_backToMainItem"
         app:showAsAction="never" />

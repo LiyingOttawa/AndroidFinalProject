@@ -28,52 +28,52 @@ import algonquin.cst2335.androidfinalproject.databinding.DictDetailsLayoutBindin
  * the name and summary of a selected dictionary entry.
  */
 public class DictDetailsFragment extends Fragment {
-    private Dict selected;
-
-    /**
-     * Creates a new fragment instance to display details of a particular dictionary entry.
-     *
-     * @param d The dictionary entry to be detailed.
-     */
-//    public DictDetailsFragment(Dict d) {
-//        selected = d;
-//    }
+    // Key constants for arguments
+    private static final String DICT_NAME = "dict_name";
+    private static final String DICT_DEFINITION = "dict_definition";
 
     public DictDetailsFragment() {
         // Required empty public constructor
     }
 
-//    public static DictDetailsFragment newInstance(Dict dict) {
-//        DictDetailsFragment fragment = new DictDetailsFragment();
-//        Bundle args = new Bundle();
-//        args.putString(DICT_NAME, dict.getDictName());
-//        args.putString(DICT_DEFINITION, dict.getDictDefinition());
-//        fragment.setArguments(args);
-//        return fragment;
-//    }
-
     /**
-     * Inflates the fragment's layout, populating it with information from the selected dictionary entry.
+     * Creates a new instance of DictDetailsFragment using the provided dictionary entry details.
      *
-     * @param inflater           Used to inflate the views in the fragment.
-     * @param container          Optional parent to which the fragment's UI may be attached.
-     * @param savedInstanceState Contains data from a previous instance of the fragment, if any.
-     * @return The root View of the inflated layout for this fragment, or null.
+     * @param dictName The name of the dictionary entry.
+     * @param dictDefinition The definition of the dictionary entry.
+     * @return A new instance of fragment DictDetailsFragment.
      */
-    @RequiresApi(api = Build.VERSION_CODES.N)
+    public static DictDetailsFragment newInstance(String dictName, String dictDefinition) {
+        DictDetailsFragment fragment = new DictDetailsFragment();
+        Bundle args = new Bundle();
+        args.putString(DICT_NAME, dictName);
+        args.putString(DICT_DEFINITION, dictDefinition);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
+        // Inflate the layout for this fragment
+        DictDetailsLayoutBinding binding = DictDetailsLayoutBinding.inflate(inflater, container, false);
 
-        // Inflate the layout using data binding
-        DictDetailsLayoutBinding binding = DictDetailsLayoutBinding.inflate(inflater);
+        if (getArguments() != null) {
+            // Get the dictionary name and definition from the arguments
+            String dictName = getArguments().getString(DICT_NAME);
+            String dictDefinition = getArguments().getString(DICT_DEFINITION);
 
-        // Display the name of the dictionary entry in the UI
-        binding.dictNameText.setText(selected.dictName);
-
-        // Format the summary text from HTML and display it
-        Spanned spannedText = Html.fromHtml(selected.summary, Html.FROM_HTML_MODE_LEGACY);
-        binding.summaryTitle.setText(spannedText);
+            // Display the name and definition in the UI
+            binding.dictNameText.setText(dictName);
+            // Assuming you want to display the definition as HTML formatted text
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                Spanned spannedDefinition = Html.fromHtml(dictDefinition, Html.FROM_HTML_MODE_LEGACY);
+                binding.summaryTitle.setText(spannedDefinition);
+            } else {
+                // Use a deprecated method for older devices
+                Spanned spannedDefinition = Html.fromHtml(dictDefinition);
+                binding.summaryTitle.setText(spannedDefinition);
+            }
+        }
 
         return binding.getRoot();
     }
