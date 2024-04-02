@@ -131,7 +131,7 @@ public class SunriseSunsetLookup extends AppCompatActivity {
             // Code for showing help/instructions
             AlertDialog.Builder instructionsDialog = new AlertDialog.Builder(this);
             instructionsDialog.setMessage(R.string.SongAboutuse)
-                    .setTitle(R.string.yxAboutTitle)
+                    .setTitle(R.string.About_name)
                     .setNegativeButton(getString(R.string.confirm), (dialog, cl) -> {})
                     .create().show();
             return true;
