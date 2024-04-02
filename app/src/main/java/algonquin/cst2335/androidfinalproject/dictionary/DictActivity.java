@@ -41,6 +41,8 @@ import algonquin.cst2335.androidfinalproject.MainActivity;
 import algonquin.cst2335.androidfinalproject.R;
 import algonquin.cst2335.androidfinalproject.databinding.ActivityDictBinding;
 import algonquin.cst2335.androidfinalproject.databinding.SearchDictBinding;
+import algonquin.cst2335.androidfinalproject.recipe.RecipesActivity;
+import algonquin.cst2335.androidfinalproject.song.MainSongActivity;
 
 /**
  * DictActivity serves as the main interface for the dictionary section of the application.
@@ -78,7 +80,7 @@ public class DictActivity extends AppCompatActivity {
         queue = Volley.newRequestQueue(this);
         SharedPreferences prefs = getSharedPreferences("MyData", Context.MODE_PRIVATE);
         binding.dictTextInput.setText(prefs.getString("dictName", ""));
-        setSupportActionBar(binding.dictToolbar);
+        setSupportActionBar(binding.toolbar);
         dictModel = new ViewModelProvider(this).get(DictViewModel.class);
         DictDatabase db = Room.databaseBuilder(getApplicationContext(), DictDatabase.class, "dictdb").build();
         dictDAO = db.dictDAO();
@@ -273,42 +275,80 @@ public class DictActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.dict_menu, menu);
+        getMenuInflater().inflate(R.menu.common_menu, menu);
         return true; // Return true to display the menu
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.favoriteItem) {
-            // Corrected Intent to start a new activity
+        if (id == R.id.returnHomeMenu) {
+            // Put your code for returning home here
+            AlertDialog.Builder builder = new AlertDialog.Builder(DictActivity.this);
+            builder.setMessage(getString(R.string.goToHomeSnack))
+                    .setTitle(R.string.question)
+                    .setNegativeButton(getString(R.string.reject), (a, b) -> {})
+                    .setPositiveButton(getString(R.string.confirm), (a, b) -> {
+                        Intent songSavedList = new Intent(DictActivity.this, MainActivity.class);
+                        CharSequence text3 = getString(R.string.goToHomeSnack);
+                        Toast.makeText(this, text3, Toast.LENGTH_SHORT).show();
+                        startActivity(songSavedList);
+                        Snackbar.make(binding.toolbar, getString(R.string.goToHomeSnack), Snackbar.LENGTH_LONG)
+                                .setAction(getString(R.string.undo), clk -> {
+                                    Intent mainPage = new Intent(DictActivity.this, MainActivity.class);
+                                    CharSequence text1 = getResources().getString(R.string.goToSunPage);
+                                    Toast.makeText(this, text1, Toast.LENGTH_SHORT).show();
+                                    startActivity(mainPage);
+                                })
+                                .show();
+                    }).create().show();
+            return true;
+        } else if (id == R.id.showSaveList) {
             Intent intent = new Intent(this, DictActivity.class); // Assuming SearchDictActivity is the correct class name
             startActivity(intent);
-            return true;
-        }else if(id == R.id.aboutDict) {
-            // Toast message about the author
-            Toast.makeText(this, R.string.dict_aboutToast, Toast.LENGTH_LONG).show();
-            return true;
-        }else if(id == R.id.dictBackToMainItem){
-            // May modify this code to start Main PAGE!
-            Intent intent = new Intent(this, DictActivity.class); // Assuming SearchDictActivity is the correct class name
-            startActivity(intent);
-            return true;
-        }
-        else if(id == R.id.helpItem){
-            new AlertDialog.Builder(this)
-                    .setTitle("Help")
-                    .setMessage(R.string.dict_helpAlert)
-                    .setPositiveButton(android.R.string.ok, null)
-                    .show();
-            return true;
-        }
 
-        return super.onOptionsItemSelected(item);
+            return true;
+        }
+        else if(id==R.id.goingTosunApp)
+        {
+
+            return true;
+        }
+        else if(id==R.id.ritaRecipePage)
+        {
+            Intent intent = new Intent(this, RecipesActivity.class); // Assuming SearchDictActivity is the correct class name
+            startActivity(intent);
+            return true;
+        }
+        else if(id==R.id.ritaDictionary)
+        {
+            Intent intent = new Intent(this, DictActivity.class); // Assuming SearchDictActivity is the correct class name
+            startActivity(intent);
+            return true;
+        }
+        else if(id==R.id.goingToSongApp)
+        {
+            Intent intent = new Intent(this, MainSongActivity.class); // Assuming SearchDictActivity is the correct class name
+            startActivity(intent);
+            return true;
+        }
+        else if (id == R.id.menu_about) {
+            // Code for showing the version info
+            Toast.makeText(this, getString(R.string.dict_aboutToast), Toast.LENGTH_LONG).show();
+            return true;
+        } else if (id == R.id.menu_help) {
+            // Code for showing help/instructions
+            AlertDialog.Builder instructionsDialog = new AlertDialog.Builder(this);
+            instructionsDialog.setMessage(R.string.dict_helpAlert)
+                    .setTitle(R.string.yxAboutTitle)
+                    .setNegativeButton(getString(R.string.confirm), (dialog, cl) -> {})
+                    .create().show();
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
     }
-
-
 
     /**
      * ViewHolder class for the dictionary RecyclerView.
@@ -323,7 +363,7 @@ public class DictActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Log.d("xx","");
-                    int position = getAbsoluteAdapterPosition();
+                    int position = getAdapterPosition();
                     Dict selected = dicts.get(position);
                     dictModel.selectedDicts.postValue(selected);
                 }

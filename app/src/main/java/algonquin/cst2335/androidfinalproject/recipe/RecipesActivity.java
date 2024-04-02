@@ -42,6 +42,8 @@ import java.util.concurrent.Executors;
 import algonquin.cst2335.androidfinalproject.MainActivity;
 import algonquin.cst2335.androidfinalproject.R;
 import algonquin.cst2335.androidfinalproject.databinding.ActivityRecipesBinding;
+import algonquin.cst2335.androidfinalproject.dictionary.DictActivity;
+import algonquin.cst2335.androidfinalproject.song.MainSongActivity;
 
 public class RecipesActivity extends AppCompatActivity implements RecipesAdapter.OnClickRecipeListener {
     private static final String TAG = "RecipesActivity";
@@ -141,7 +143,31 @@ public class RecipesActivity extends AppCompatActivity implements RecipesAdapter
             showFavorite=true;
             showFavorite();
             return true;
-        } else if (id == R.id.menu_about) {
+        }
+        else if(id==R.id.goingTosunApp)
+        {
+
+            return true;
+        }
+        else if(id==R.id.ritaRecipePage)
+        {
+            Intent intent = new Intent(this, RecipesActivity.class); // Assuming SearchDictActivity is the correct class name
+            startActivity(intent);
+            return true;
+        }
+        else if(id==R.id.ritaDictionary)
+        {
+            Intent intent = new Intent(this, DictActivity.class); // Assuming SearchDictActivity is the correct class name
+            startActivity(intent);
+            return true;
+        }
+        else if(id==R.id.goingToSongApp)
+        {
+            Intent intent = new Intent(this, MainSongActivity.class); // Assuming SearchDictActivity is the correct class name
+            startActivity(intent);
+            return true;
+        }
+        else if (id == R.id.menu_about) {
             // Code for showing the version info
             Toast.makeText(this, getString(R.string.version), Toast.LENGTH_LONG).show();
             return true;
