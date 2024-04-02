@@ -10,6 +10,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import algonquin.cst2335.androidfinalproject.dictionary.DictActivity;
 import algonquin.cst2335.androidfinalproject.recipe.RecipesActivity;
 import algonquin.cst2335.androidfinalproject.song.MainSongActivity;
 
@@ -31,6 +32,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, RecipesActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        findViewById(R.id.button3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, DictActivity.class);
                 startActivity(intent);
             }
         });

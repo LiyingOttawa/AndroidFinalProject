@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/favoriteItem"
+        android:icon="@drawable/favorite"
+        android:title="@string/dict_favItem"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/dictBackToMainItem"
+        android:title="@string/dict_backToMainItem"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/helpItem"
+        android:icon="@drawable/help"
+        android:title="@string/dict_helpItem"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/aboutDict"
+        android:title="@string/dict_aboutItem"
+        app:showAsAction="never" />
+
+</menu>
