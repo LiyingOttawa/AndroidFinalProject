@@ -207,13 +207,6 @@ public class MainSongActivity extends AppCompatActivity implements SongAdapter.O
                                 .show();
                     }).create().show();
             return true;
-        } else if (id == R.id.showSaveList) {
-            // Code for showing the saved list
-            Intent songSavedList = new Intent(MainSongActivity.this, MainSongActivity.class);
-            CharSequence showText = getString(R.string.goToSaveList);
-            Toast.makeText(this, showText, Toast.LENGTH_SHORT).show();
-            startActivity(songSavedList);
-            return true;
         } else if (id == R.id.song_menu_about) {
             // Code for showing the version info
             Toast.makeText(this, getString(R.string.version), Toast.LENGTH_LONG).show();
