@@ -35,9 +35,22 @@ public class DictDetailsFragment extends Fragment {
      *
      * @param d The dictionary entry to be detailed.
      */
-    public DictDetailsFragment(Dict d) {
-        selected = d;
+//    public DictDetailsFragment(Dict d) {
+//        selected = d;
+//    }
+
+    public DictDetailsFragment() {
+        // Required empty public constructor
     }
+
+//    public static DictDetailsFragment newInstance(Dict dict) {
+//        DictDetailsFragment fragment = new DictDetailsFragment();
+//        Bundle args = new Bundle();
+//        args.putString(DICT_NAME, dict.getDictName());
+//        args.putString(DICT_DEFINITION, dict.getDictDefinition());
+//        fragment.setArguments(args);
+//        return fragment;
+//    }
 
     /**
      * Inflates the fragment's layout, populating it with information from the selected dictionary entry.

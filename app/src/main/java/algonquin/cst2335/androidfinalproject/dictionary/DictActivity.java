@@ -1,6 +1,8 @@
 package algonquin.cst2335.androidfinalproject.dictionary;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -213,12 +215,32 @@ public class DictActivity extends AppCompatActivity {
      * Displays the details of a selected dictionary entry.
      * @param selectedDict The selected dictionary entry.
      */
+    /**
+     * Displays the details of a selected dictionary entry.
+     * @param selectedDict The selected dictionary entry.
+     */
     private void displayDictDetails(Dict selectedDict) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         dialogBuilder.setTitle(selectedDict.getDictName());
         dialogBuilder.setMessage(selectedDict.getDictDefinition());
         dialogBuilder.setPositiveButton(R.string.dict_ok, null);
+        dialogBuilder.setNegativeButton(R.string.dict_addItem, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                saveDefinition(selectedDict);
+                Toast.makeText(DictActivity.this, "Definition saved!", Toast.LENGTH_SHORT).show();
+            }
+        });
         dialogBuilder.show();
+    }
+
+    /**
+     * Saves the given dictionary entry to the database.
+     * @param dict The dictionary entry to save.
+     */
+    public void saveDefinition(Dict dict) {
+        Executor thread = Executors.newSingleThreadExecutor();
+        thread.execute(() -> dictDAO.insertDict(dict));
     }
 
     /**
@@ -246,20 +268,35 @@ public class DictActivity extends AppCompatActivity {
             dicts.clear();
             dictAdapter.notifyDataSetChanged();
             return true;
+        } else if(id == R.id.favoriteItem) {
+            DictDetailsFragment detailsFragment = new DictDetailsFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.searchFragmentLocation, detailsFragment)
+                    .commit();
+            return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
+
 
     /**
      * ViewHolder class for the dictionary RecyclerView.
      */
-    private static class MyRowHolder extends RecyclerView.ViewHolder {
+    class MyRowHolder extends RecyclerView.ViewHolder {
         TextView dictName;
 
         public MyRowHolder(View itemView) {
             super(itemView);
             dictName = itemView.findViewById(R.id.dictResult);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d("xx","");
+                    int position = getAbsoluteAdapterPosition();
+                    Dict selected = dicts.get(position);
+                    dictModel.selectedDicts.postValue(selected);
+                }
+            });
         }
     }
 }

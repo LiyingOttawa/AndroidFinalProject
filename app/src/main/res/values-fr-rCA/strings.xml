@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">AndroidFinalProject</string>
-    <string name="landingTitle"> CENTRE TOUT-EN-UN </string>
+    <string name="landingTitle">CENTRE TOUT-EN-UN</string>
 
     <!--   Dict Strings -->
     <string name="dict_titleText">Dictionaire</string>
@@ -24,16 +23,16 @@
     <string name="dict_insertSucceedToast">Mot enregistré.</string>
     <string name="dict_alreadyInToast">Le mot a déjà été enregistré.</string>
     <string name="dict_noSelectedToast">Aucun mot n\'a été sélectionné.</string>
-    <string name="dict_deleteAlert">Voulez vous supprimer le mot? </string>
+    <string name="dict_deleteAlert">Voulez vous supprimer le mot?</string>
     <string name="dict_yes">Oui</string>
     <string name="dict_no">Non</string>
     <string name="dict_undo">Annuler</string>
     <string name="dict_deletedSnackbar">Vous avez supprimé le mot.</string>
-    <string name="dict_aboutToast">Dictionnaire créé par feng qi</string>
-    <string name="dict_helpTitle"> Instruction: </string>
+    <string name="dict_aboutToast">Dictionnaire créé par Feng Qi</string>
+    <string name="dict_helpTitle">Instruction:</string>
     <string name="dict_ok">OK</string>
-    <string name="dict_helpAlert">Instruction:\n
-                                   1. Dans le champ ModifierTexte, saisissez un terme de recherche.\n
+    <string name="dict_helpAlert">Instructions:\n
+                                   1. Dans le champ EditText, saisissez un terme de recherche.\n
                                    2. Pour récupérer les définitions, cliquez sur le bouton Rechercher.\n
                                    3. Cliquez sur l\'un des résultats de la recherche pour afficher les informations détaillées dans un fragment séparé.\n
                                    4. Pour ajouter un terme à la liste des termes enregistrés, cliquez sur l\'icône Enregistrer.\n
