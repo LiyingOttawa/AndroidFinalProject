@@ -26,6 +26,8 @@ import java.util.concurrent.atomic.AtomicReference;
 import algonquin.cst2335.androidfinalproject.MainActivity;
 import algonquin.cst2335.androidfinalproject.R;
 import algonquin.cst2335.androidfinalproject.databinding.ActivitySongMainBinding;
+import algonquin.cst2335.androidfinalproject.song.SongDao;
+import algonquin.cst2335.androidfinalproject.song.SongAdapter;
 
 
 public class MainSongActivity extends AppCompatActivity implements SongAdapter.OnFavoriteClickListener {

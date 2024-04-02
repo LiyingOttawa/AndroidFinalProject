@@ -9,26 +9,26 @@
         app:showAsAction="always" />
     <item
         android:id="@+id/sunMenu"
-        android:icon="@android:drawable/alert_dark_frame"
+        android:icon="@drawable/sun_icon"
         android:title="@string/sunApp"
         app:showAsAction="never" />
     <item
         android:id="@+id/recipeMenu"
-        android:icon="?android:attr/galleryItemBackground"
+        android:icon="@drawable/recipe_icon"
         android:title="@string/recipeApp"
         app:showAsAction="never" />
     <item
         android:id="@+id/dictionaryMenu"
-        android:icon="@drawable/ic_notifications_black_24dp"
+        android:icon="@drawable/dictionary_icon"
         android:title="@string/dictionaryApp"
         app:showAsAction="never" />
     <item
         android:id="@+id/deezer"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@drawable/song_icon"
         android:title="@string/deezerApp"
         app:showAsAction="never" />
     <item
         android:id="@+id/about"
-        android:title="@string/ziyaoAbout"
+        android:title="@string/SongAbout"
         app:showAsAction="never" />
 </menu>
