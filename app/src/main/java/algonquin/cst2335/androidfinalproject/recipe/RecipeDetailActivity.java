@@ -48,6 +48,9 @@ public class RecipeDetailActivity extends AppCompatActivity {
 
         binding = ActivityRecipeDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        setSupportActionBar(binding.myToolbar);
+        // Enable the "up" button
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mQueue = Volley.newRequestQueue(getApplicationContext());
         Intent intent = getIntent();
@@ -99,13 +102,26 @@ public class RecipeDetailActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        // Handle "up" button click
+        if (id == android.R.id.home) {
+            onBackPressed(); // Navigate back
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     protected void onStop() {
         super.onStop();
         mQueue.cancelAll(TAG);
     }
 
     private void loadRecipeDetail(long recipeId) {
-        String url = String.format("https://api.spoonacular.com/recipes/%d/information?apiKey=%s",recipeId,"c918ec43605843bfbbb1e58441d40b7c");
+        String url = String.format("https://api.spoonacular.com/recipes/%d/information?apiKey=%s",recipeId,Constants.RECEIPE_API);
         JsonObjectRequest request  = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {

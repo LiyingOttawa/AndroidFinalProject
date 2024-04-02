@@ -46,7 +46,6 @@ import algonquin.cst2335.androidfinalproject.databinding.ActivityRecipesBinding;
 public class RecipesActivity extends AppCompatActivity implements RecipesAdapter.OnClickRecipeListener {
     private static final String TAG = "RecipesActivity";
     private ActivityRecipesBinding binding;
-//    private ToolbarLayoutBinding toolbarLayoutBinding;
     private RecipesViewModel viewModel;
     private ArrayList<Recipe> recipeList;
     private RecipesAdapter adapter;
@@ -55,6 +54,8 @@ public class RecipesActivity extends AppCompatActivity implements RecipesAdapter
 
     SharedPreferences prefs;
     SharedPreferences.Editor editor;
+    private boolean showFavorite=false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +68,8 @@ public class RecipesActivity extends AppCompatActivity implements RecipesAdapter
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                showFavorite = false;
+                searchView.clearFocus();
                 String queryTrimed=query.trim();
                 if(!queryTrimed.isEmpty()) {
                     filter(queryTrimed);
@@ -103,37 +106,6 @@ public class RecipesActivity extends AppCompatActivity implements RecipesAdapter
         searchView.setQuery(query,false);
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        super.onCreateOptionsMenu(menu);
-//        getMenuInflater().inflate(R.menu.common_menu, menu);
-//        getMenuInflater().inflate(R.menu.search_recipe_menu, menu);
-//
-//
-//        menu.findItem(R.id.actionFavorite).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-//            @Override
-//            public boolean onMenuItemClick(@NonNull MenuItem item) {
-//                Executor thread = Executors.newSingleThreadExecutor();
-//                thread.execute(() ->
-//                {
-//                    List<Recipe> recipes = new ArrayList<Recipe>();
-//
-//                    for (RecipeDetail rcp:mDAO.retrieveAll()) {
-//                        recipes.add(new Recipe(rcp));
-//                    }
-//                    recipeList.clear();
-//                    recipeList.addAll( recipes); //Once you get the data from database
-//
-//                    runOnUiThread( () ->  {
-//                        adapter.notifyDataSetChanged();
-//                    }); //You can then load the RecyclerView
-//                });
-//
-//                return false;
-//            }
-//        });
-//        return true;
-//    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.common_menu, menu);
@@ -166,23 +138,8 @@ public class RecipesActivity extends AppCompatActivity implements RecipesAdapter
                     }).create().show();
             return true;
         } else if (id == R.id.showSaveList) {
-            Executor thread = Executors.newSingleThreadExecutor();
-                thread.execute(() ->
-                {
-                    List<Recipe> recipes = new ArrayList<Recipe>();
-
-                    for (RecipeDetail rcp:mDAO.retrieveAll()) {
-                        recipes.add(new Recipe(rcp));
-                    }
-                    recipeList.clear();
-                    recipeList.addAll( recipes); //Once you get the data from database
-
-                    runOnUiThread( () ->  {
-                        adapter.notifyDataSetChanged();
-                        CharSequence showText = getString(R.string.goToSaveList);
-                        Toast.makeText(this, showText, Toast.LENGTH_SHORT).show();
-                    }); //You can then load the RecyclerView
-                });
+            showFavorite=true;
+            showFavorite();
             return true;
         } else if (id == R.id.menu_about) {
             // Code for showing the version info
@@ -201,15 +158,44 @@ public class RecipesActivity extends AppCompatActivity implements RecipesAdapter
         }
     }
 
+    private void showFavorite() {
+        Executor thread = Executors.newSingleThreadExecutor();
+        thread.execute(() ->
+        {
+            List<Recipe> recipes = new ArrayList<Recipe>();
+
+            for (RecipeDetail rcp:mDAO.retrieveAll()) {
+                recipes.add(new Recipe(rcp));
+            }
+            recipeList.clear();
+            recipeList.addAll( recipes); //Once you get the data from database
+
+            runOnUiThread( () ->  {
+                adapter.notifyDataSetChanged();
+                CharSequence showText = getString(R.string.goToSaveList);
+                Toast.makeText(this, showText, Toast.LENGTH_SHORT).show();
+            }); //You can then load the RecyclerView
+        });
+    }
+
     @Override
     protected void onStop() {
         super.onStop();
         mQueue.cancelAll(TAG);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(showFavorite)
+        {
+            showFavorite();
+        }
+    }
+
     private void filter(String query) {
         mQueue.cancelAll(TAG);
-        String url = String.format("https://api.spoonacular.com/recipes/complexSearch?query=%s&apiKey=%s",query,"c918ec43605843bfbbb1e58441d40b7c");
+        String url = String.format("https://api.spoonacular.com/recipes/complexSearch?query=%s&apiKey=%s",query,Constants.RECEIPE_API );
         JsonObjectRequest request  = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
