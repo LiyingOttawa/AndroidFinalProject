@@ -107,6 +107,8 @@ public class RecipesActivity extends AppCompatActivity implements RecipesAdapter
 
         String query = prefs.getString("query", "");
         searchView.setQuery(query,false);
+
+        checkEmpty();
     }
 
     @Override
@@ -199,6 +201,7 @@ public class RecipesActivity extends AppCompatActivity implements RecipesAdapter
 
             runOnUiThread( () ->  {
                 adapter.notifyDataSetChanged();
+                checkEmpty();
                 CharSequence showText = getString(R.string.goToSaveList);
                 Toast.makeText(this, showText, Toast.LENGTH_SHORT).show();
             }); //You can then load the RecyclerView
@@ -234,6 +237,7 @@ public class RecipesActivity extends AppCompatActivity implements RecipesAdapter
                     recipeList.addAll(recipeParsed);
                 }
                 adapter.notifyDataSetChanged();
+                checkEmpty();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -267,6 +271,17 @@ public class RecipesActivity extends AppCompatActivity implements RecipesAdapter
         return null;
     }
 
+    private void checkEmpty()
+    {
+        // Check if the adapter has no items
+        if (adapter.getItemCount() == 0) {
+            binding.emptyTextView.setVisibility(View.VISIBLE);
+            binding.rvRecipes.setVisibility(View.GONE);
+        } else {
+            binding.emptyTextView.setVisibility(View.GONE);
+            binding.rvRecipes.setVisibility(View.VISIBLE);
+        }
+    }
 
     @Override
     public void onRecipeClick(long recipeId) {
