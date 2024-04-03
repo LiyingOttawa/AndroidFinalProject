@@ -80,7 +80,7 @@ public class RecipesActivity extends AppCompatActivity implements RecipesAdapter
                     editor.apply();
                 }
                 else {
-                    Toast.makeText(RecipesActivity.this,"Please enter a Recipe",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RecipesActivity.this,getString(R.string.toastEmpty),Toast.LENGTH_SHORT).show();
                 }
                 return false;
             }
@@ -170,12 +170,12 @@ public class RecipesActivity extends AppCompatActivity implements RecipesAdapter
         }
         else if (id == R.id.menu_about) {
             // Code for showing the version info
-            Toast.makeText(this, getString(R.string.version), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.toastVersion), Toast.LENGTH_LONG).show();
             return true;
         } else if (id == R.id.menu_help) {
             // Code for showing help/instructions
             AlertDialog.Builder instructionsDialog = new AlertDialog.Builder(this);
-            instructionsDialog.setMessage(R.string.SongAboutuse)
+            instructionsDialog.setMessage(R.string.recipeInstruction)
                     .setTitle(R.string.About_name)
                     .setNegativeButton(getString(R.string.confirm), (dialog, cl) -> {})
                     .create().show();
