@@ -1,3 +1,10 @@
+/**
+ * Filename: RecipesActivity.java
+ * Purpose:This activity displays a list of recipes and allows users to search for recipes, view details, and save favorites.
+ * Author: Liying Guo
+ * Lab Section: CST2355 011
+ * Creation Date: March 31, 2024
+ */
 package algonquin.cst2335.androidfinalproject.recipe;
 
 import static java.util.Locale.filter;
@@ -54,11 +61,17 @@ public class RecipesActivity extends AppCompatActivity implements RecipesAdapter
     private RecipesAdapter adapter;
     private RequestQueue mQueue;
     private RecipeDetailDAO mDAO;
-
     SharedPreferences prefs;
     SharedPreferences.Editor editor;
     private boolean showFavorite=false;
 
+    /**
+     * Called when the activity is starting.
+     * Sets up the activity layout, initializes the ViewModel, and retrieves saved search query from SharedPreferences.
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down,
+     *                           this Bundle contains the data it most recently supplied in
+     *                           {@link #onSaveInstanceState(Bundle)}. Otherwise, it is null.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +93,7 @@ public class RecipesActivity extends AppCompatActivity implements RecipesAdapter
                     editor.apply();
                 }
                 else {
-                    Toast.makeText(RecipesActivity.this,"Please enter a Recipe",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RecipesActivity.this,getString(R.string.toastEmpty),Toast.LENGTH_SHORT).show();
                 }
                 return false;
             }
@@ -107,14 +120,28 @@ public class RecipesActivity extends AppCompatActivity implements RecipesAdapter
 
         String query = prefs.getString("query", "");
         searchView.setQuery(query,false);
+
+        checkEmpty();
     }
 
+    /**
+     * Initialize the contents of the Activity's standard options menu.
+     * This is only called once, the first time the options menu is displayed.
+     *
+     * @param menu The options menu in which you place your items.
+     * @return You must return true for the menu to be displayed; if you return false it will not be shown.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.common_menu, menu);
         return true;
     }
 
+    /**
+     * Handle the selection of items in the options menu.
+     * @param item The menu item that was selected.
+     * @return Return false to allow normal menu processing to proceed, true to consume it here.
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -170,12 +197,12 @@ public class RecipesActivity extends AppCompatActivity implements RecipesAdapter
         }
         else if (id == R.id.menu_about) {
             // Code for showing the version info
-            Toast.makeText(this, getString(R.string.version), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.toastVersion), Toast.LENGTH_LONG).show();
             return true;
         } else if (id == R.id.menu_help) {
             // Code for showing help/instructions
             AlertDialog.Builder instructionsDialog = new AlertDialog.Builder(this);
-            instructionsDialog.setMessage(R.string.SongAboutuse)
+            instructionsDialog.setMessage(R.string.recipeInstruction)
                     .setTitle(R.string.About_name)
                     .setNegativeButton(getString(R.string.confirm), (dialog, cl) -> {})
                     .create().show();
@@ -199,6 +226,7 @@ public class RecipesActivity extends AppCompatActivity implements RecipesAdapter
 
             runOnUiThread( () ->  {
                 adapter.notifyDataSetChanged();
+                checkEmpty();
                 CharSequence showText = getString(R.string.goToSaveList);
                 Toast.makeText(this, showText, Toast.LENGTH_SHORT).show();
             }); //You can then load the RecyclerView
@@ -234,6 +262,7 @@ public class RecipesActivity extends AppCompatActivity implements RecipesAdapter
                     recipeList.addAll(recipeParsed);
                 }
                 adapter.notifyDataSetChanged();
+                checkEmpty();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -267,6 +296,17 @@ public class RecipesActivity extends AppCompatActivity implements RecipesAdapter
         return null;
     }
 
+    private void checkEmpty()
+    {
+        // Check if the adapter has no items
+        if (adapter.getItemCount() == 0) {
+            binding.emptyTextView.setVisibility(View.VISIBLE);
+            binding.rvRecipes.setVisibility(View.GONE);
+        } else {
+            binding.emptyTextView.setVisibility(View.GONE);
+            binding.rvRecipes.setVisibility(View.VISIBLE);
+        }
+    }
 
     @Override
     public void onRecipeClick(long recipeId) {

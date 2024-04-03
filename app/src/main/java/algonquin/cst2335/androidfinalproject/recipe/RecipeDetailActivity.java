@@ -1,3 +1,11 @@
+/**
+ * Filename: RecipeDetailActivity.java
+ * Purpose:This activity displays detailed information about a recipe. It retrieves data
+ *         from an API and allows the user to save or remove the recipe from favorites.
+ * Author: Liying Guo
+ * Lab Section: CST2355 011
+ * Creation Date: March 31, 2024
+ */
 package algonquin.cst2335.androidfinalproject.recipe;
 
 import androidx.annotation.NonNull;
@@ -31,21 +39,22 @@ import java.util.concurrent.Executors;
 import algonquin.cst2335.androidfinalproject.R;
 import algonquin.cst2335.androidfinalproject.databinding.ActivityRecipeDetailBinding;
 import algonquin.cst2335.androidfinalproject.databinding.ActivityRecipesBinding;
-
 public class RecipeDetailActivity extends AppCompatActivity {
     private final static String TAG = "RecipeDetailActivity";
     private ActivityRecipeDetailBinding binding;
     private RequestQueue mQueue;
-
     private RecipeDetailDAO mDAO;
     private long recipeId;
     private RecipeDetail recipe;
+
+    /**
+     * Initializes the activity and sets up the UI components.
+     * @param savedInstanceState The saved instance state bundle.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_detail);
-
         binding = ActivityRecipeDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.myToolbar);
@@ -61,22 +70,25 @@ public class RecipeDetailActivity extends AppCompatActivity {
         else {
             handleError();
         }
-
         RecipeDatabase db = Room.databaseBuilder(getApplicationContext(), RecipeDatabase.class, "database-name").build();
         mDAO = db.cmDAO();
     }
 
+    /**
+     * Inflates the options menu and initializes the save/remove action item.
+     * @param menu The options menu.
+     * @return True if the menu is successfully inflated.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.recipe_detail_menu, menu);
-
         Executor thread = Executors.newSingleThreadExecutor();
         thread.execute(() ->
         {
             RecipeDetail detail =  mDAO.retrieve(recipeId);
             boolean isSaved = detail!=null;
-            runOnUiThread( () -> menu.findItem(R.id.actionSave).setTitle(isSaved?"Remove":"Save"));
+            runOnUiThread( () -> menu.findItem(R.id.actionSave).setTitle(isSaved?getString(R.string.remove):getString(R.string.save)));
         });
          menu.findItem(R.id.actionSave).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
              @Override
@@ -84,7 +96,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
                  Executor thread = Executors.newSingleThreadExecutor();
                  thread.execute(() ->
                  {
-                     boolean isToSave= menu.findItem(R.id.actionSave).getTitle().equals(getString(R.string.save));
+                     boolean isToSave= menu.findItem(R.id.actionSave).getTitle().toString().equalsIgnoreCase(getString(R.string.save));
                      if(isToSave && recipe != null)
                      {
                          mDAO.createRecipe(recipe);
@@ -101,6 +113,11 @@ public class RecipeDetailActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Handles options menu item selection.
+     * @param item The selected menu item.
+     * @return True if the item selection is handled successfully.
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -114,12 +131,19 @@ public class RecipeDetailActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Cancels any pending network requests when the activity is stopped.
+     */
     @Override
     protected void onStop() {
         super.onStop();
         mQueue.cancelAll(TAG);
     }
 
+    /**
+     * Loads detailed information about the recipe from the API.
+     * @param recipeId The ID of the recipe to load.
+     */
     private void loadRecipeDetail(long recipeId) {
         String url = String.format("https://api.spoonacular.com/recipes/%d/information?apiKey=%s",recipeId,Constants.RECEIPE_API);
         JsonObjectRequest request  = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
@@ -151,7 +175,10 @@ public class RecipeDetailActivity extends AppCompatActivity {
 
         mQueue.add(request);
     }
-    //Toast error and navigate back to previous activity
+
+    /**
+     * Displays an error message and navigates back to the previous activity.
+     */
     private void handleError()
     {
 

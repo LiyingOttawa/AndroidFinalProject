@@ -1,9 +1,19 @@
+/*
+ * Filename: RecipeDetail.java
+ * Purpose: Defines a Room entity class representing detailed recipe information.
+ * Author: Liying Guo
+ * Lab Section: CST2355 011
+ * Creation Date: March 31, 2024
+ */
 package algonquin.cst2335.androidfinalproject.recipe;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+/**
+ * Room entity class representing detailed recipe information.
+ */
 @Entity
 public class RecipeDetail {
     @PrimaryKey
@@ -19,6 +29,14 @@ public class RecipeDetail {
     @ColumnInfo(name="instructions")
     private String instructions;
 
+    /**
+     * Constructs a RecipeDetail object with the specified attributes.
+     * @param id The unique identifier of the recipe.
+     * @param title The title of the recipe.
+     * @param summary The summary of the recipe.
+     * @param image The URL of the recipe image.
+     * @param instructions The instructions for preparing the recipe.
+     */
     public RecipeDetail(long id, String title, String summary, String image, String instructions) {
         this.id = id;
         this.title = title;
@@ -27,6 +45,7 @@ public class RecipeDetail {
         this.instructions = instructions;
     }
 
+    // Getters and setters for private attributes omitted for brevity
     public long getId() {
         return id;
     }

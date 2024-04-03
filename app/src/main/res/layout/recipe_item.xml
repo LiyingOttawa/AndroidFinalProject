@@ -13,8 +13,8 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="4dp"
         android:text="time"
-        android:textColor="#AE2020"
-        android:textSize="34sp"
+        android:textColor="@color/black"
+        android:textSize="24sp"
         app:layout_constraintStart_toEndOf="@+id/img_recipeItem"
         app:layout_constraintTop_toTopOf="parent" />
 
