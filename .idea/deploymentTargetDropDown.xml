@@ -2,6 +2,21 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="MainActivityTest">
+        <State />
+      </entry>
+      <entry key="OpenDetailFromSearchResultTest">
+        <State />
+      </entry>
+      <entry key="SaveDetailTest">
+        <State />
+      </entry>
+      <entry key="SearchPizzaWithResultTest">
+        <State />
+      </entry>
+      <entry key="ShowNoResultBeforeSearchTest">
+        <State />
+      </entry>
       <entry key="app">
         <State />
       </entry>

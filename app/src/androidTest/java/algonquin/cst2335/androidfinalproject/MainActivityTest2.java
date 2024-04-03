@@ -27,26 +27,25 @@ import androidx.test.filters.LargeTest;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
-import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class MainActivityTest {
+public class MainActivityTest2 {
 
     @Rule
     public ActivityScenarioRule<MainActivity> mActivityScenarioRule =
             new ActivityScenarioRule<>(MainActivity.class);
 
     @Test
-    public void mainActivityTest() {
+    public void mainActivityTest2() {
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
         try {
-            Thread.sleep(5918);
+            Thread.sleep(5495);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -98,12 +97,14 @@ public class MainActivityTest {
             e.printStackTrace();
         }
 
-        ViewInteraction textView = onView(
-                allOf(withText("Details"),
-                        withParent(allOf(withId(R.id.myToolbar),
-                                withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class)))),
+        ViewInteraction actionMenuItemView = onView(allOf(withId(R.id.actionSave), withText("save")));
+        actionMenuItemView.perform(click());
+
+        ViewInteraction button = onView(
+                allOf(withId(R.id.actionSave), withText("REMOVE"),
+                        withParent(withParent(withId(R.id.myToolbar))),
                         isDisplayed()));
-        textView.check(matches(withText("Details")));
+        button.check(matches(isDisplayed()));
     }
 
     private static Matcher<View> childAtPosition(
