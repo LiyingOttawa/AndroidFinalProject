@@ -1,3 +1,10 @@
+/*
+ * Filename: RecipesAdapter.java
+ * Purpose: Defines a RecyclerView adapter for displaying a list of recipes.
+ * Author: Liying Guo
+ * Lab Section: CST2355 011
+ * Creation Date: March 31, 2024
+ */
 package algonquin.cst2335.androidfinalproject.recipe;
 
 import android.view.LayoutInflater;
@@ -15,9 +22,18 @@ import java.util.ArrayList;
 
 import algonquin.cst2335.androidfinalproject.databinding.RecipeItemBinding;
 
+/**
+ * RecyclerView adapter for displaying a list of recipes.
+ */
 public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ItemViewHolder> {
     private final RecipesAdapter.OnClickRecipeListener activity;
     ArrayList<Recipe> recipeList;
+
+    /**
+     * Constructs a new RecipesAdapter.
+     * @param recipeList The list of recipes to display.
+     * @param activity The activity implementing OnClickRecipeListener.
+     */
     public RecipesAdapter(ArrayList<Recipe> recipeList, RecipesAdapter.OnClickRecipeListener activity)
     {
         this.recipeList= recipeList;
@@ -42,11 +58,21 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ItemView
         return recipeList.size();
     }
 
+    /**
+     * Interface to handle click events on recipe items.
+     */
     public static interface OnClickRecipeListener
     {
+        /**
+         * Called when a recipe item is clicked.
+         * @param recipeId The ID of the clicked recipe.
+         */
         void onRecipeClick(long recipeId);
     }
 
+    /**
+     * ViewHolder class for the recipe item views.
+     */
     public class ItemViewHolder extends RecyclerView.ViewHolder{
         public ImageView recipeImg;
         public TextView recipeTitle;
