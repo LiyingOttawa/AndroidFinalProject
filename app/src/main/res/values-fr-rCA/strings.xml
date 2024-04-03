@@ -126,4 +126,11 @@
     <string name="recipeInstruction">Instructions sur l\'utilisation de l\'interface :         \\n1. Saisir un terme de recherche au milieu de l\'EditText fourni.         \\n2. Cliquer sur le bouton Recherche pour extraire les données de la recherche de recettes.         \\n3. Cliquez sur le bouton MyFavorite pour accéder à la liste des recettes favorites que vous avez sauvegardées auparavant.         \\n4. Cliquez sur une recette pour voir les informations détaillées dans un fragment séparé.         \\n5. Cliquez sur le bouton Enregistrer pour ajouter une recette à Mes favoris dans le fragment.         \\n6. Pour supprimer une recette, sélectionnez-la et cliquez sur le bouton Supprimer.         \\n7. La barre d\'outils permet d\'accéder à la page Soleil, à la page Recette, à la page Dictionnaire et à la page Chanson.         \\n8. A chaque page, cliquer sur le bouton de retour pour revenir à la page précédente.         \\n9. Pour plus d\'aide, vous pouvez contacter le support.  Traduit avec DeepL.com (version gratuite)</string>
     <string name="toastVersion">Version 1.0, créée par Liying Guo</string>
     <string name="toastEmpty">Veuillez saisir une recette</string>
+    <string name="recipeTitle">Titre de la recette</string>
+    <string name="summary">Résumé de la recette</string>
+    <string name="instruction">Instructions pour la recette</string>
+    <string name="emptyText">Pas de résultat, veuillez rechercher ou ajouter l\'article à vos favoris</string>
+    <string name="time">temps</string>
+    <string name="rc_Title">Recettes</string>
+    <string name="rc_Details">Détails</string>
 </resources>

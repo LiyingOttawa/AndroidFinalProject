@@ -17,7 +17,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:title="Recipes" />
+        app:title="@string/rc_Title" />
+
     <SearchView
         android:id="@+id/search_view"
         android:layout_width="match_parent"
@@ -38,6 +39,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <TextView android:id="@+id/emptyTextView"
         android:layout_width="409dp"
         android:layout_height="729dp"
@@ -46,6 +48,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="No Result,please search or add item to favorite"
+        android:text="@string/emptyText"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

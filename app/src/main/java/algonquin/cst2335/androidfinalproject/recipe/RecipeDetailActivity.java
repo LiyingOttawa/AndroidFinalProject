@@ -11,34 +11,26 @@ package algonquin.cst2335.androidfinalproject.recipe;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.SearchView;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-
 import algonquin.cst2335.androidfinalproject.R;
 import algonquin.cst2335.androidfinalproject.databinding.ActivityRecipeDetailBinding;
-import algonquin.cst2335.androidfinalproject.databinding.ActivityRecipesBinding;
+
 public class RecipeDetailActivity extends AppCompatActivity {
     private final static String TAG = "RecipeDetailActivity";
     private ActivityRecipeDetailBinding binding;
