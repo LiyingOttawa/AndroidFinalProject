@@ -2,19 +2,19 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="MainActivityTest">
+      <entry key="MenuInteractionTest">
         <State />
       </entry>
-      <entry key="OpenDetailFromSearchResultTest">
+      <entry key="NavToDictTest">
         <State />
       </entry>
-      <entry key="SaveDetailTest">
+      <entry key="OverflowMenuInteractionTest">
         <State />
       </entry>
-      <entry key="SearchPizzaWithResultTest">
+      <entry key="SaveWordDefinitionTest">
         <State />
       </entry>
-      <entry key="ShowNoResultBeforeSearchTest">
+      <entry key="SearchHistoryTest">
         <State />
       </entry>
       <entry key="app">
