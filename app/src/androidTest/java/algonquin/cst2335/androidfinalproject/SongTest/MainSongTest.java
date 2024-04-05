@@ -1,4 +1,4 @@
-package algonquin.cst2335.androidfinalproject;
+package algonquin.cst2335.androidfinalproject.SongTest;
 
 
 import static androidx.test.espresso.Espresso.onView;
@@ -17,20 +17,25 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 
 import androidx.test.espresso.ViewInteraction;
+import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 import org.hamcrest.TypeSafeMatcher;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import algonquin.cst2335.androidfinalproject.MainActivity;
+import algonquin.cst2335.androidfinalproject.R;
+
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class MainSongActivityTest {
+public class MainSongTest {
 
     @Rule
     public ActivityScenarioRule<MainActivity> mActivityScenarioRule =
@@ -39,7 +44,7 @@ public class MainSongActivityTest {
     @Test
     public void mainSongActivityTest() {
         ViewInteraction materialButton = onView(
-                allOf(withId(R.id.button4), withText("Deezer Song Search API"),
+                Matchers.allOf(ViewMatchers.withId(R.id.button4), withText("Deezer Song Search API"),
                         childAtPosition(
                                 allOf(withId(R.id.container),
                                         childAtPosition(
