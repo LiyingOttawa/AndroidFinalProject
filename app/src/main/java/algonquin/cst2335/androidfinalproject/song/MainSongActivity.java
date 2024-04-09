@@ -1,4 +1,13 @@
+/*
+ * Filename: MainSongActivity.java
+ * Author: Zhaoguo Han
+ * Lab Section: CST2355 011
+ * Creation Date: March 31, 2024
+ * Purpose: This class represents the main activity for the Song application. It allows users to search for songs, view search results, add songs to favorites, and view favorite songs. Additionally, users can navigate to other sections of the application such as the dictionary, recipe, and sunrise/sunset lookup.
+ */
+
 package algonquin.cst2335.androidfinalproject.song;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,15 +34,17 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import algonquin.cst2335.androidfinalproject.MainActivity;
 import algonquin.cst2335.androidfinalproject.R;
+import algonquin.cst2335.androidfinalproject.databinding.ActivitySongDetailsBinding;
 import algonquin.cst2335.androidfinalproject.databinding.ActivitySongMainBinding;
 import algonquin.cst2335.androidfinalproject.dictionary.DictActivity;
 import algonquin.cst2335.androidfinalproject.recipe.RecipesActivity;
-import algonquin.cst2335.androidfinalproject.song.SongDao;
-import algonquin.cst2335.androidfinalproject.song.SongAdapter;
 import algonquin.cst2335.androidfinalproject.ui.SunriseSunsetLookup;
 
-
+/**
+ * Main activity for the Song application.
+ */
 public class MainSongActivity extends AppCompatActivity implements SongAdapter.OnFavoriteClickListener {
+
     private EditText editTextSearch;
     private Button buttonSearch;
     protected Button buttonAddToFavorites;
@@ -44,11 +55,16 @@ public class MainSongActivity extends AppCompatActivity implements SongAdapter.O
     private SongDao songDAO;
     private boolean showFavorites = false;
     protected ActivitySongMainBinding binding;
+    protected ActivitySongDetailsBinding binding1;
 
     private static final String DB_NAME = "song_DB";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        binding1 = ActivitySongDetailsBinding.inflate(getLayoutInflater());
+        setContentView(binding1.getRoot());
 
         binding = ActivitySongMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -59,10 +75,10 @@ public class MainSongActivity extends AppCompatActivity implements SongAdapter.O
         AtomicReference<EditText> searchText = new AtomicReference<>(binding.editTextSearch);
 
         editTextSearch = findViewById(R.id.editTextSearch);
-        buttonSearch = findViewById(R.id.buttonSearch);
-        buttonAddToFavorites = findViewById(R.id.buttonAddToFavorites);
-        buttonMyFavorites = findViewById(R.id.buttonMyFavorites);
-        recyclerViewResults = findViewById(R.id.recyclerViewResults);
+        buttonSearch = binding.buttonSearch;
+        buttonMyFavorites = binding.buttonMyFavorites;
+        buttonAddToFavorites = binding1.buttonAddToFavorites;
+        recyclerViewResults = binding.recyclerViewResults;
         recyclerViewResults.setLayoutManager(new LinearLayoutManager(this));
 
         // Initialize SongAdapter
@@ -75,6 +91,7 @@ public class MainSongActivity extends AppCompatActivity implements SongAdapter.O
         songAdapter.setOnFavoriteClickListener(this); // Set the activity as the listener
 
         initDatabase();
+
         buttonSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,6 +104,7 @@ public class MainSongActivity extends AppCompatActivity implements SongAdapter.O
                 }
             }
         });
+
         buttonMyFavorites.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,8 +118,11 @@ public class MainSongActivity extends AppCompatActivity implements SongAdapter.O
                 }
             }
         });
-        // Set click listener for the RecyclerView item buttons
     }
+
+    /**
+     * Initialize the database and DAO.
+     */
     private void initDatabase() {
         // Initialize database and DAO
         SongDatabase db = Room.databaseBuilder(getApplicationContext(),
@@ -118,8 +139,11 @@ public class MainSongActivity extends AppCompatActivity implements SongAdapter.O
         Toast.makeText(this, "Added to Favorites: " + song.getTitle(), Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Perform a search for the specified artist name.
+     * @param artistName The name of the artist to search for.
+     */
     private void performSearch(String artistName) {
-
         songAdapter.setShowAddButton(true);
         songAdapter.setShowDeleteButton(false);
 
@@ -130,24 +154,28 @@ public class MainSongActivity extends AppCompatActivity implements SongAdapter.O
                 // Update RecyclerView with search results
                 songAdapter.setSongList(songs);
             }
+
             @Override
             public void onError(String errorMessage) {
                 Toast.makeText(MainSongActivity.this, "Error: " + errorMessage, Toast.LENGTH_SHORT).show();
             }
         });
     }
-    // Method to display favorite songs
-    private void displayFavoriteSongs() {
 
-        // show the Delete Button
+    /**
+     * Display the list of favorite songs.
+     */
+    private void displayFavoriteSongs() {
         songAdapter.setShowDeleteButton(true);
         songAdapter.setShowAddButton(false);
+
         // Use AsyncTask or a background thread to perform the database query asynchronously
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
                 // Retrieve favorite songs from the database using the DAO
                 List<Song> favoriteSongs = songDAO.getAllSongs();
+
                 // Update the UI on the main thread with the retrieved data
                 runOnUiThread(new Runnable() {
                     @Override
@@ -158,7 +186,11 @@ public class MainSongActivity extends AppCompatActivity implements SongAdapter.O
             }
         });
     }
-    // Method to delete a song from favorites
+
+    /**
+     * Delete a song from the list of favorite songs.
+     * @param song The song to delete.
+     */
     public void deleteFavoriteSong(Song song) {
         // Use AsyncTask or a background thread to delete the song from the database asynchronously
         AsyncTask.execute(new Runnable() {
@@ -166,6 +198,7 @@ public class MainSongActivity extends AppCompatActivity implements SongAdapter.O
             public void run() {
                 // Delete the song from the database using the DAO
                 songDAO.delete(song);
+
                 // Update the UI on the main thread to reflect the changes (if needed)
                 runOnUiThread(new Runnable() {
                     @Override
@@ -258,5 +291,4 @@ public class MainSongActivity extends AppCompatActivity implements SongAdapter.O
             return super.onOptionsItemSelected(item);
         }
     }
-
 }

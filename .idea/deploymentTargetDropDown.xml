@@ -2,23 +2,24 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="MainActivityTest">
-        <State />
-      </entry>
-      <entry key="OpenDetailFromSearchResultTest">
-        <State />
-      </entry>
-      <entry key="SaveDetailTest">
-        <State />
-      </entry>
-      <entry key="SearchPizzaWithResultTest">
-        <State />
-      </entry>
-      <entry key="ShowNoResultBeforeSearchTest">
+      <entry key="DeezerActivityTest">
         <State />
       </entry>
       <entry key="app">
-        <State />
+        <State>
+          <targetSelectedWithDropDown>
+            <Target>
+              <type value="QUICK_BOOT_TARGET" />
+              <deviceKey>
+                <Key>
+                  <type value="VIRTUAL_DEVICE_PATH" />
+                  <value value="C:\Users\hanzg\.android\avd\Pixel_3a_API_34_extension_level_7_x86_64.avd" />
+                </Key>
+              </deviceKey>
+            </Target>
+          </targetSelectedWithDropDown>
+          <timeTargetWasSelectedWithDropDown value="2024-04-02T15:20:22.605352700Z" />
+        </State>
       </entry>
     </value>
   </component>

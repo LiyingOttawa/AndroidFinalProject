@@ -1,5 +1,11 @@
 package algonquin.cst2335.androidfinalproject.song;
-
+/*
+ * Filename: Song.java
+ * Author: Zhaoguo Han
+ * Lab Section: CST2355 011
+ * Creation Date: March 31, 2024
+ * Purpose:  This class is used in conjunction with Room database to store and retrieve Deezer songs.
+ */
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
